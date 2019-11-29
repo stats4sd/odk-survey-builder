@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'progressbar';
+
+
+/** Layout **/
+
+
+.footer-section {
+    background: #011627;
+    margin-top: 100px !important;
+}
