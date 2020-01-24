@@ -20,6 +20,7 @@ class CreateModulesTable extends Migration
             $table->text('description');
             $table->integer('minutes');
             $table->boolean('core');
+            $table->string('logo');
             $table->timestamps();
         });
     }

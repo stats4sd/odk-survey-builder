@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasImageUploads;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasImageUploads;
 
     /*
     |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ class Module extends Model
     protected $table = 'modules';
     public $incrementing = false;
     protected $guarded = [];
+
+    protected $images = ['logo'];
 
 
     /*

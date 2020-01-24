@@ -64,6 +64,11 @@ class ModuleCrudController extends CrudController
                 'label' => 'Is Core Module?',
                 'type' => 'boolean',
             ],
+            [
+                'name' => 'logo',
+                'type' => 'image',
+                'label' => 'Logo',
+            ],
         ]);
 
     }
@@ -105,6 +110,12 @@ class ModuleCrudController extends CrudController
                 'name' => 'core',
                 'label' => 'Is Core Module?',
                 'type' => 'checkbox',
+            ],
+            [
+                'name' => 'logo',
+                'type' => 'image',
+                'label' => 'Logo',
+                'upload' => true,
             ],
         ]);
     }

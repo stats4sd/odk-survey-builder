@@ -17,3 +17,216 @@
     background: #011627;
     margin-top: 100px !important;
 }
+
+
+/** Accordion Pieces **/
+
+.accordion-area {
+
+    .panel-link.active.collapsed {
+        background-color: $frn-darkblue;
+    }
+
+    .panel-body {
+        img {
+            width: 100%;
+            border-radius: 0;
+        }
+    }
+}
+
+/* Accordion */
+
+.accordion-area .panel {
+    margin-bottom: 16px;
+}
+
+.accordion-area .panel-link:after {
+    content: "+";
+    position: absolute;
+    font-size: 15px;
+    right: 26px;
+    top: 0;
+    line-height: 16px;
+    width: 15px;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.faq-accordion.accordion-area .panel-link,
+.faq-accordion.accordion-area .panel-link.active.collapsed {
+    padding: 17px 100px 17px 20px;
+}
+
+.faq-accordion.accordion-area .panel-link:after {
+    right: 44px;
+}
+
+.accordion-area .panel-header .panel-link.collapsed {
+    &:after {
+        content: "+";
+    }
+}
+
+.accordion-area .panel-link.active:after {
+    content: "-";
+}
+
+.accordion-area .panel-link.active {
+    background: $frn-green;
+}
+
+.accordion-area .panel-link,
+.accordion-area .panel-link.active.collapsed {
+    text-align: left;
+    position: relative;
+    width: 100%;
+    padding: 17px 65px 17px 20px;
+    padding-left: 41px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+    cursor: pointer;
+    border: none;
+    min-height: 70px;
+    border-radius: 13px;
+//    @extend .bg-gradient;
+}
+
+.accordion-area .panel-body {
+    padding: 45px 2px 0;
+    h4 {
+        margin-bottom: 25px;
+    }
+    p {
+        font-size: 15px;
+        margin-bottom: 0;
+        line-height: 1.8;
+    }
+}
+
+.faq-accordion .panel-body {
+    padding: 50px 5px 0;
+    h4 {
+        padding-top: 25px;
+    }
+    p {
+        font-size: 15px;
+        margin-bottom: 0;
+        line-height: 1.8;
+    }
+    img {
+        border-radius: 15px;
+    }
+}
+
+.checkdiv {
+    display: inline-block;
+    //height: 12.5rem;
+    width: 100%;
+    //background-color: #14354f;
+    // border-radius: 20px;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    position: relative;
+    margin-bottom: 0px;
+
+    &.selected {
+        border: $frn-green 2px solid;
+    }
+}
+
+.img-block {
+    color: #fff !important;
+    justify-content: center;
+
+    button {
+    display: inline-block;
+    height: 17rem;
+    background-position: center;
+    background-size: cover;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+
+        span {
+          //  padding-top: 95%;
+            position: absolute;
+            left: 0;
+            bottom: 2rem;
+            width: 100%;
+        }
+    }
+
+    .col-xl-3,.col-lg-4,.col-sm-6,.col-xl-2,.col-lg-3,.col-md-4 {
+        padding: 0rem !important;
+        position: relative;
+        border: 0.3rem solid #f8fafc;
+        }
+    }
+
+ //hover effects for surveybuilder
+ .button1 {
+    -webkit-filter: brightness(110%) contrast(70%) grayscale(20%);
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    -ms-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.button1:hover {
+    -webkit-filter: brightness(100%);
+
+
+    span {
+        text-decoration: underline;
+    }
+
+}
+//hover effects for categories
+
+.button2 {
+    -webkit-filter: brightness(100%);
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    -ms-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+
+.button2:hover {
+    -webkit-filter: brightness(70%) grayscale(20%);
+
+
+    span {
+        text-decoration: underline;
+    }
+}
+.big-img-button {
+    min-width: 210px;
+
+    img {
+
+    }
+
+    .big-img-button-label {
+        position: relative;
+        top: 50%;
+    }
+}

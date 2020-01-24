@@ -28,29 +28,17 @@
             currentStep: {
                 type: Number,
                 default: 1,
+            },
+            steps: {
+                type: Array,
+                default () {
+                    return [];
+                }
             }
         },
 
         data () {
             return {
-                steps: [
-                    {
-                        'id': 1,
-                        'title': "Information Needs / Themes",
-                    },
-                    {
-                        'id': 2,
-                        'title': "Rhomis Core Setup",
-                    },
-                    {
-                        'id': 3,
-                        'title': "Modules",
-                    },
-                    {
-                        'id': 4,
-                        'title': "Preview and Finish",
-                    },
-                ]
             }
         }
 

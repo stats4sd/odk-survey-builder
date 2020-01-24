@@ -46,6 +46,11 @@ class ThemeCrudController extends CrudController
                 'limit' => "50",
                 'type' => 'text',
             ],
+            [
+                'name' => 'logo',
+                'type' => 'image',
+                'label' => 'Logo',
+            ],
         ]);
     }
 
@@ -69,6 +74,14 @@ class ThemeCrudController extends CrudController
                 'name' => 'description',
                 'label' => 'Description',
                 'type' => 'textarea',
+            ],
+            [
+                'name' => 'logo',
+                'type' => 'image',
+                'label' => 'Logo',
+                'upload' => true,
+                'crop' => true,
+                'ratio' => '1.4'
             ],
         ]);
     }

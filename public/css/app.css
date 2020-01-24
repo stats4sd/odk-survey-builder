@@ -11436,3 +11436,203 @@ a.text-dark:focus {
   border-color: #f46036;
 }
 
+/** Layout **/
+
+.footer-section {
+  background: #011627;
+  margin-top: 100px !important;
+}
+
+/** Accordion Pieces **/
+
+.accordion-area .panel-link.active.collapsed {
+  background-color: #011627;
+}
+
+.accordion-area .panel-body img {
+  width: 100%;
+  border-radius: 0;
+}
+
+/* Accordion */
+
+.accordion-area .panel {
+  margin-bottom: 16px;
+}
+
+.accordion-area .panel-link:after {
+  content: "+";
+  position: absolute;
+  font-size: 15px;
+  right: 26px;
+  top: 0;
+  line-height: 16px;
+  width: 15px;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.faq-accordion.accordion-area .panel-link,
+.faq-accordion.accordion-area .panel-link.active.collapsed {
+  padding: 17px 100px 17px 20px;
+}
+
+.faq-accordion.accordion-area .panel-link:after {
+  right: 44px;
+}
+
+.accordion-area .panel-header .panel-link.collapsed:after {
+  content: "+";
+}
+
+.accordion-area .panel-link.active:after {
+  content: "-";
+}
+
+.accordion-area .panel-link.active {
+  background: #12756b;
+}
+
+.accordion-area .panel-link,
+.accordion-area .panel-link.active.collapsed {
+  text-align: left;
+  position: relative;
+  width: 100%;
+  padding: 17px 65px 17px 20px;
+  padding-left: 41px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  min-height: 70px;
+  border-radius: 13px;
+}
+
+.accordion-area .panel-body {
+  padding: 45px 2px 0;
+}
+
+.accordion-area .panel-body h4 {
+  margin-bottom: 25px;
+}
+
+.accordion-area .panel-body p {
+  font-size: 15px;
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+
+.faq-accordion .panel-body {
+  padding: 50px 5px 0;
+}
+
+.faq-accordion .panel-body h4 {
+  padding-top: 25px;
+}
+
+.faq-accordion .panel-body p {
+  font-size: 15px;
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+
+.faq-accordion .panel-body img {
+  border-radius: 15px;
+}
+
+.checkdiv {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 0px;
+}
+
+.checkdiv.selected {
+  border: #12756b 2px solid;
+}
+
+.img-block {
+  color: #fff !important;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.img-block button {
+  display: inline-block;
+  height: 17rem;
+  background-position: center;
+  background-size: cover;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.img-block button span {
+  position: absolute;
+  left: 0;
+  bottom: 2rem;
+  width: 100%;
+}
+
+.img-block .col-xl-3,
+.img-block .col-lg-4,
+.img-block .col-sm-6,
+.img-block .col-xl-2,
+.img-block .col-lg-3,
+.img-block .col-md-4 {
+  padding: 0rem !important;
+  position: relative;
+  border: 0.3rem solid #f8fafc;
+}
+
+.button1 {
+  -webkit-filter: brightness(110%) contrast(70%) grayscale(20%);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.button1:hover {
+  -webkit-filter: brightness(100%);
+}
+
+.button1:hover span {
+  text-decoration: underline;
+}
+
+.button2 {
+  -webkit-filter: brightness(100%);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.button2:hover {
+  -webkit-filter: brightness(70%) grayscale(20%);
+}
+
+.button2:hover span {
+  text-decoration: underline;
+}
+
+.big-img-button {
+  min-width: 210px;
+}
+
+.big-img-button .big-img-button-label {
+  position: relative;
+  top: 50%;
+}
+

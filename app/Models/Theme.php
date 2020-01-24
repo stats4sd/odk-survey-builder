@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasImageUploads;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasImageUploads;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ class Theme extends Model
     public $incrementing = false;
     protected $guarded = [];
 
+    protected $images = ['logo'];
 
     /*
     |--------------------------------------------------------------------------

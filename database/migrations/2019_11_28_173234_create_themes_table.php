@@ -16,6 +16,7 @@ class CreateThemesTable extends Migration
         Schema::create('themes', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('title');
+            $table->string('logo');
             $table->text('description')->nullable();
             $table->timestamps();
         });
