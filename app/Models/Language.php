@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Module;
 
 class Language extends Model
 {
@@ -25,6 +26,10 @@ class Language extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function modules ()
+    {
+        return $this->belongsToMany(Module::class, '_link_modules_sdgs','module_id','sdg_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

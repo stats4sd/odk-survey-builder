@@ -11636,3 +11636,29 @@ a.text-dark:focus {
   top: 50%;
 }
 
+#next button .site-btn:hover {
+  background-color: #e44e24;
+  -webkit-transition: background-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.site-btn {
+  background-color: #e44e24;
+  -webkit-transition: background-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.site-btn-sec {
+  background-color: #a5a9aa;
+}
+
+.site-btn-sec:hover {
+  background-color: #838888;
+  -webkit-transition: background-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.modal-footer .site-btn {
+  font-size: 0.9rem;
+}
+
