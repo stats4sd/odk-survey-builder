@@ -2157,6 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+var rootUrl = "http://localhost:8000";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2176,9 +2177,8 @@ __webpack_require__.r(__webpack_exports__);
       }],
       themes: [],
       selectedThemes: [],
-      selectedCore: [],
-      selectedModules: [],
-      selectedPreview: []
+      selectedCore: '',
+      selectedModules: []
     };
   },
   mounted: function mounted() {
@@ -2200,6 +2200,17 @@ __webpack_require__.r(__webpack_exports__);
       } else if (message == 'modules') {
         this.currentStep = 4;
       }
+    },
+    submit: function submit(event) {
+      axios({
+        method: 'post',
+        url: rootUrl + "/survey-builder-selected",
+        data: {
+          selectedThemes: this.selectedThemes,
+          selectedCore: this.selectedCore,
+          selectedModules: this.selectedModules
+        }
+      });
     }
   }
 });
@@ -50302,7 +50313,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "panel-link active",
+                        staticClass: "panel-link active collapsed",
                         attrs: {
                           "data-toggle": "collapse",
                           "data-target": "#collapseTwo"
@@ -50397,9 +50408,7 @@ var render = function() {
                                 "label",
                                 {
                                   staticClass: "checkdiv",
-                                  class: {
-                                    selected: _vm.selectedCore.includes(true)
-                                  },
+                                  class: { selected: _vm.selectedCore == true },
                                   attrs: { for: "full_core_check" }
                                 },
                                 [
@@ -50467,7 +50476,7 @@ var render = function() {
                                 {
                                   staticClass: "checkdiv",
                                   class: {
-                                    selected: _vm.selectedCore.includes(false)
+                                    selected: _vm.selectedCore == false
                                   },
                                   attrs: { for: "reduced_core_check" }
                                 },
@@ -50490,7 +50499,7 @@ var render = function() {
                             attrs: {
                               "data-toggle": "collapse",
                               href: "#collapseThree",
-                              "aria-expanded": "true",
+                              "aria-expanded": "false",
                               "aria-controls": "collapseThree"
                             },
                             on: {
@@ -50531,7 +50540,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "panel-link active",
+                        staticClass: "panel-link active collapsed",
                         attrs: {
                           "data-toggle": "collapse",
                           "data-target": "#collapseThree"
@@ -50715,7 +50724,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "panel-link active",
+                        staticClass: "panel-link active collapsed",
                         attrs: {
                           "data-toggle": "collapse",
                           "data-target": "#collapseFour"
@@ -50779,7 +50788,7 @@ var render = function() {
                         "div",
                         { staticClass: "row py-4 mx-4 justify-content-center" },
                         [
-                          _vm.selectedCore.includes(true)
+                          _vm.selectedCore == true
                             ? _c(
                                 "div",
                                 {
@@ -50794,7 +50803,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.selectedCore.includes(false)
+                          _vm.selectedCore == false
                             ? _c(
                                 "div",
                                 {
@@ -50868,7 +50877,26 @@ var render = function() {
                         0
                       ),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", { staticStyle: { "text-align": "center" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "site-btn my-4",
+                            attrs: {
+                              "data-toggle": "",
+                              href: "",
+                              "aria-expanded": "false",
+                              "aria-controls": ""
+                            },
+                            on: { click: _vm.submit }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Finish\n                            "
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ]
                 )
@@ -50881,32 +50909,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "text-align": "center" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "site-btn my-4",
-          attrs: {
-            "data-toggle": "collapse",
-            href: "#collapse2",
-            "aria-expanded": "true",
-            "aria-controls": "collapse2"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                Finish\n                            "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

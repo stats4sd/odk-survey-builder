@@ -80,7 +80,7 @@
                         class="panel-header"
                     >
                         <button
-                            class="panel-link active"
+                            class="panel-link active collapsed"
                             data-toggle="collapse"
                             data-target="#collapseTwo"
                         >
@@ -108,7 +108,7 @@
                                     <label
                                         class="checkdiv"
                                         :for="`full_core_check`"
-                                        :class="{ 'selected' : selectedCore.includes(true)}"
+                                        :class="{ 'selected' : selectedCore == true}"
                                     >
                                         <img
                                             :src="'img/hh_demographics.png'"
@@ -126,7 +126,7 @@
                                     <label
                                         class="checkdiv"
                                         :for="`reduced_core_check`"
-                                        :class="{ 'selected' : selectedCore.includes(false)}"
+                                        :class="{ 'selected' : selectedCore == false}"
                                     >
                                         <img
                                             :src="'img/noun_survey.png'"
@@ -137,7 +137,7 @@
                             </div>
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="collapse" href="#collapseThree"
-                                    aria-expanded="true" aria-controls="collapseThree" v-on:click="nextToForm('core')">
+                                    aria-expanded="false" aria-controls="collapseThree" v-on:click="nextToForm('core')">
                                     Next
                                 </button>
                             </div>
@@ -159,7 +159,7 @@
                         class="panel-header"
                     >
                         <button
-                            class="panel-link active"
+                            class="panel-link active collapsed"
                             data-toggle="collapse"
                             data-target="#collapseThree"
                         >
@@ -230,7 +230,7 @@
                         class="panel-header"
                     >
                         <button
-                            class="panel-link active"
+                            class="panel-link active collapsed"
                             data-toggle="collapse"
                             data-target="#collapseFour"
                         >
@@ -265,14 +265,14 @@
                             <h4>Core</h4>
                             <div class="row py-4 mx-4 justify-content-center">
                                 
-                                <div v-if="selectedCore.includes(true)"
+                                <div v-if="selectedCore==true"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
                                         :src="'img/hh_demographics.png'"
                                     >
                                 </div>
-                                <div v-if="selectedCore.includes(false)"
+                                <div v-if="selectedCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
@@ -303,8 +303,8 @@
                             </div>  
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapse2"
-                                    aria-expanded="true" aria-controls="collapse2">
+                                <button class="site-btn my-4" data-toggle="" href=""
+                                    aria-expanded="false" aria-controls="" v-on:click='submit'>
                                     Finish
                                 </button>
                             </div>
@@ -318,6 +318,8 @@
 </template>
 
 <script>
+
+const rootUrl = process.env.MIX_APP_URL
 
     export default {
         data () {
@@ -343,9 +345,8 @@
                 ],
                 themes: [],
                 selectedThemes: [],
-                selectedCore:[],
+                selectedCore:'',
                 selectedModules:[],
-                selectedPreview:[],
             }
         },
 
@@ -370,6 +371,18 @@
                 } else if(message=='modules') {
                     this.currentStep = 4;
                 }
+            },
+            submit: function(event){
+                axios({
+                    method: 'post',
+                    url: rootUrl+"/survey-builder-selected",
+                    data: {
+                        selectedThemes: this.selectedThemes,
+                        selectedCore: this.selectedCore,
+                        selectedModules: this.selectedModules,
+                    }
+                });
+
             }
         }
     }

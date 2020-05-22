@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Models\Module;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class ModuleController extends Controller
+class FormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        return Module::all();
+        
     }
 
     /**
@@ -36,30 +34,30 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-       # dd($request);
-        return $request;
+       	#dd($request);
+        #return $request;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Module  $module
+     * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function show(Module $module)
+    public function show(Form $form)
     {
-        #$module = Module::with(['sdgs'])->get();
+        
 
-        return $module->json();
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Module  $module
+     * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module)
+    public function edit(Form $form)
     {
         //
     }
@@ -68,10 +66,10 @@ class ModuleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Module  $module
+     * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Module $module)
+    public function update(Request $request, Form $form)
     {
         //
     }
@@ -79,10 +77,10 @@ class ModuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Module  $module
+     * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Module $module)
+    public function destroy(Form $form)
     {
         //
     }
