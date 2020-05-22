@@ -57,8 +57,8 @@
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapse2"
-                                    aria-expanded="true" aria-controls="collapse2"  v-on:click="nextToForm('themes')">
+                                <button class="site-btn my-4" data-toggle="collapse" href="#collapseTwo"
+                                    aria-expanded="true" aria-controls="collapseTwo"  v-on:click="nextToForm('themes')">
                                     Next
                                 </button>
                             </div>
@@ -90,39 +90,54 @@
                     <div
                         id="collapseTwo"
                         class="collapse"
-                        v-bind:class="{ show: collapseTwoIsActive}"
                         data-parent="#survey-core"
                     >
                         <div class="py-4 mx-4">
                             <h3>Do you want full Core or Reduced Core Rhomis?</h3>
                             <p class="mt-3">Selection options below to begin</p>
                             <div class="row img-block py-4 mx-4 justify-content-center">
-                                <div
-                                    v-for="theme in themes"
-                                    :key="theme.id"
-                                    class="col-xl-2 col-lg-3 col-md-4 big-img-button"
-                                >
+                                <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
+
                                     <input
-                                        :id="`${theme.id}_check`"
+                                        :id="`full_core_check`"
                                         v-model="selectedCore"
                                         type="checkbox"
-                                        :value="theme.id"
+                                        :value="true"
                                         class="d-none"
                                     >
                                     <label
                                         class="checkdiv"
-                                        :for="`${theme.id}_check`"
-                                        :class="{ 'selected' : selectedCore.includes(theme.id)}"
+                                        :for="`full_core_check`"
+                                        :class="{ 'selected' : selectedCore.includes(true)}"
                                     >
                                         <img
-                                            :src="'storage/'+theme.logo"
+                                            :src="'img/hh_demographics.png'"
+                                        >
+                                    </label>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
+                                    <input
+                                        :id="`reduced_core_check`"
+                                        v-model="selectedCore"
+                                        type="checkbox"
+                                        :value="false"
+                                        class="d-none"
+                                    >
+                                    <label
+                                        class="checkdiv"
+                                        :for="`reduced_core_check`"
+                                        :class="{ 'selected' : selectedCore.includes(false)}"
+                                    >
+                                        <img
+                                            :src="'img/noun_survey.png'"
                                         >
                                     </label>
                                 </div>
+                              
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapse2"
-                                    aria-expanded="true" aria-controls="collapse2">
+                                <button class="site-btn my-4" data-toggle="collapse" href="#collapseThree"
+                                    aria-expanded="true" aria-controls="collapseThree" v-on:click="nextToForm('core')">
                                     Next
                                 </button>
                             </div>
@@ -159,33 +174,41 @@
                         <div class="py-4 mx-4">
                             <h3>Add optional modules</h3>
                             <p class="mt-3">Selection options below to begin</p>
-                            <div class="row img-block py-4 mx-4 justify-content-center">
+                            <div class="row py-4 mx-4 justify-content-center">
                                 <div
-                                    v-for="theme in themes"
-                                    :key="theme.id"
-                                    class="col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                    v-for="mod in modules"
+                                    :key="mod.id"
+                                    class="col-md-4"
                                 >
                                     <input
-                                        :id="`${theme.id}_check`"
+                                        :id="`${mod.id}_check`"
                                         v-model="selectedModules"
                                         type="checkbox"
-                                        :value="theme.id"
+                                        :value="mod.id"
                                         class="d-none"
                                     >
-                                    <label
-                                        class="checkdiv"
-                                        :for="`${theme.id}_check`"
-                                        :class="{ 'selected' : selectedModules.includes(theme.id)}"
-                                    >
-                                        <img
-                                            :src="'storage/'+theme.logo"
+                                    <div class="card">
+                                        
+                                        <label
+                                            class="checkdiv"
+                                            :for="`${mod.id}_check`"
+                                            :class="{ 'selected' : selectedModules.includes(mod.id)}"
                                         >
-                                    </label>
+                                            <img
+                                                :src="'storage/'+mod.logo"
+                                            >
+                                        </label>
+                                        <h5>Description: {{mod.description}}</h5>
+                                        <h5>Time: {{mod.minutes}} min</h5>
+                                        <h5>Language: {{mod.minutes}} </h5>
+                                        <h5>Sdgs: {{mod.minutes}} </h5>
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapse2"
-                                    aria-expanded="true" aria-controls="collapse2">
+                                <button class="site-btn my-4" data-toggle="collapse" href="#collapseFour"
+                                    aria-expanded="false" aria-controls="collapseFour" v-on:click="nextToForm('modules')">
                                     Next
                                 </button>
                             </div>
@@ -222,34 +245,67 @@
                         <div class="py-4 mx-4">
                             <h3>Preview and finish</h3>
                             <p class="mt-3"></p>
-                            <div class="row img-block py-4 mx-4 justify-content-center">
+                            <h4>Themes</h4>
+                            <div class="row py-4 mx-4 justify-content-center">
                                 <div
                                     v-for="theme in themes"
-                                    :key="theme.id"
-                                    class="col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                    :key="theme.id" 
                                 >
-                                    <input
-                                        :id="`${theme.id}_check`"
-                                        v-model="selectedPreview"
-                                        type="checkbox"
-                                        :value="theme.id"
-                                        class="d-none"
-                                    >
-                                    <label
-                                        class="checkdiv"
-                                        :for="`${theme.id}_check`"
-                                        :class="{ 'selected' : selectedPreview.includes(theme.id)}"
+                                    <div v-if="selectedThemes.includes(theme.id)"
+                                        class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
                                         <img
                                             :src="'storage/'+theme.logo"
                                         >
-                                    </label>
+                                    </div>
+                                    
                                 </div>
+                            </div>
+
+                            <h4>Core</h4>
+                            <div class="row py-4 mx-4 justify-content-center">
+                                
+                                <div v-if="selectedCore.includes(true)"
+                                    class="col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                >
+                                    <img
+                                        :src="'img/hh_demographics.png'"
+                                    >
+                                </div>
+                                <div v-if="selectedCore.includes(false)"
+                                    class="col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                >
+                                    <img
+                                        :src="'img/noun_survey.png'"
+                                    >
+                                </div>
+                            </div>
+
+                            <h4>Modules</h4>
+                            <div class="row py-4 mx-4 justify-content-center">
+                                <div
+                                    v-for="mod in modules"
+                                    :key="mod.id" 
+                                >
+                                    <div v-if="selectedModules.includes(mod.id)"
+                                        class="col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                    >
+                                    <div class="card">
+                                        <img
+                                            :src="'storage/'+mod.logo"
+                                        >
+                                        <h5>Description: {{mod.description}}</h5>
+                                        <h5>Time: {{mod.minutes}} min</h5>
+                                        <h5>Language: {{mod.minutes}} </h5>
+                                        <h5>Sdgs: {{mod.minutes}} </h5>
+                                    </div>
+                                </div>
+                            </div>  
                             </div>
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="collapse" href="#collapse2"
                                     aria-expanded="true" aria-controls="collapse2">
-                                    Next
+                                    Finish
                                 </button>
                             </div>
                         </div>
@@ -297,14 +353,22 @@
 
             axios.get('api/themes').then((response) => {
                 this.themes = response.data;
+            }),
+
+            axios.get('api/modules').then((response) => {
+                this.modules = response.data;
+                console.log(this.modules);
             })
         },
 
         methods: {
             nextToForm: function (message) {
                 if(message=='themes') {
-              
-                    this.collapseTwoIsActive = true;
+                    this.currentStep = 2;
+                } else if(message=='core') {
+                    this.currentStep = 3;
+                } else if(message=='modules') {
+                    this.currentStep = 4;
                 }
             }
         }

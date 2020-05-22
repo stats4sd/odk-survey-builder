@@ -2101,6 +2101,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2130,12 +2186,19 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('api/themes').then(function (response) {
       _this.themes = response.data;
+    }), axios.get('api/modules').then(function (response) {
+      _this.modules = response.data;
+      console.log(_this.modules);
     });
   },
   methods: {
     nextToForm: function nextToForm(message) {
       if (message == 'themes') {
-        this.collapseTwoIsActive = true;
+        this.currentStep = 2;
+      } else if (message == 'core') {
+        this.currentStep = 3;
+      } else if (message == 'modules') {
+        this.currentStep = 4;
       }
     }
   }
@@ -50197,9 +50260,9 @@ var render = function() {
                             staticClass: "site-btn my-4",
                             attrs: {
                               "data-toggle": "collapse",
-                              href: "#collapse2",
+                              href: "#collapseTwo",
                               "aria-expanded": "true",
-                              "aria-controls": "collapse2"
+                              "aria-controls": "collapseTwo"
                             },
                             on: {
                               click: function($event) {
@@ -50260,7 +50323,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "collapse",
-                    class: { show: _vm.collapseTwoIsActive },
                     attrs: { id: "collapseTwo", "data-parent": "#survey-core" }
                   },
                   [
@@ -50279,11 +50341,10 @@ var render = function() {
                           staticClass:
                             "row img-block py-4 mx-4 justify-content-center"
                         },
-                        _vm._l(_vm.themes, function(theme) {
-                          return _c(
+                        [
+                          _c(
                             "div",
                             {
-                              key: theme.id,
                               staticClass:
                                 "col-xl-2 col-lg-3 col-md-4 big-img-button"
                             },
@@ -50299,13 +50360,13 @@ var render = function() {
                                 ],
                                 staticClass: "d-none",
                                 attrs: {
-                                  id: theme.id + "_check",
+                                  id: "full_core_check",
                                   type: "checkbox"
                                 },
                                 domProps: {
-                                  value: theme.id,
+                                  value: true,
                                   checked: Array.isArray(_vm.selectedCore)
-                                    ? _vm._i(_vm.selectedCore, theme.id) > -1
+                                    ? _vm._i(_vm.selectedCore, true) > -1
                                     : _vm.selectedCore
                                 },
                                 on: {
@@ -50314,7 +50375,7 @@ var render = function() {
                                       $$el = $event.target,
                                       $$c = $$el.checked ? true : false
                                     if (Array.isArray($$a)) {
-                                      var $$v = theme.id,
+                                      var $$v = true,
                                         $$i = _vm._i($$a, $$v)
                                       if ($$el.checked) {
                                         $$i < 0 &&
@@ -50337,25 +50398,114 @@ var render = function() {
                                 {
                                   staticClass: "checkdiv",
                                   class: {
-                                    selected: _vm.selectedCore.includes(
-                                      theme.id
-                                    )
+                                    selected: _vm.selectedCore.includes(true)
                                   },
-                                  attrs: { for: theme.id + "_check" }
+                                  attrs: { for: "full_core_check" }
                                 },
                                 [
                                   _c("img", {
-                                    attrs: { src: "storage/" + theme.logo }
+                                    attrs: { src: "img/hh_demographics.png" }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-xl-2 col-lg-3 col-md-4 big-img-button"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selectedCore,
+                                    expression: "selectedCore"
+                                  }
+                                ],
+                                staticClass: "d-none",
+                                attrs: {
+                                  id: "reduced_core_check",
+                                  type: "checkbox"
+                                },
+                                domProps: {
+                                  value: false,
+                                  checked: Array.isArray(_vm.selectedCore)
+                                    ? _vm._i(_vm.selectedCore, false) > -1
+                                    : _vm.selectedCore
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.selectedCore,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = false,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.selectedCore = $$a.concat([$$v]))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.selectedCore = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
+                                      }
+                                    } else {
+                                      _vm.selectedCore = $$c
+                                    }
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "checkdiv",
+                                  class: {
+                                    selected: _vm.selectedCore.includes(false)
+                                  },
+                                  attrs: { for: "reduced_core_check" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: { src: "img/noun_survey.png" }
                                   })
                                 ]
                               )
                             ]
                           )
-                        }),
-                        0
+                        ]
                       ),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", { staticStyle: { "text-align": "center" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "site-btn my-4",
+                            attrs: {
+                              "data-toggle": "collapse",
+                              href: "#collapseThree",
+                              "aria-expanded": "true",
+                              "aria-controls": "collapseThree"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.nextToForm("core")
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Next\n                            "
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ]
                 )
@@ -50417,18 +50567,11 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        {
-                          staticClass:
-                            "row img-block py-4 mx-4 justify-content-center"
-                        },
-                        _vm._l(_vm.themes, function(theme) {
+                        { staticClass: "row py-4 mx-4 justify-content-center" },
+                        _vm._l(_vm.modules, function(mod) {
                           return _c(
                             "div",
-                            {
-                              key: theme.id,
-                              staticClass:
-                                "col-xl-2 col-lg-3 col-md-4 big-img-button"
-                            },
+                            { key: mod.id, staticClass: "col-md-4" },
                             [
                               _c("input", {
                                 directives: [
@@ -50441,13 +50584,13 @@ var render = function() {
                                 ],
                                 staticClass: "d-none",
                                 attrs: {
-                                  id: theme.id + "_check",
+                                  id: mod.id + "_check",
                                   type: "checkbox"
                                 },
                                 domProps: {
-                                  value: theme.id,
+                                  value: mod.id,
                                   checked: Array.isArray(_vm.selectedModules)
-                                    ? _vm._i(_vm.selectedModules, theme.id) > -1
+                                    ? _vm._i(_vm.selectedModules, mod.id) > -1
                                     : _vm.selectedModules
                                 },
                                 on: {
@@ -50456,7 +50599,7 @@ var render = function() {
                                       $$el = $event.target,
                                       $$c = $$el.checked ? true : false
                                     if (Array.isArray($$a)) {
-                                      var $$v = theme.id,
+                                      var $$v = mod.id,
                                         $$i = _vm._i($$a, $$v)
                                       if ($$el.checked) {
                                         $$i < 0 &&
@@ -50476,30 +50619,77 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "checkdiv",
-                                  class: {
-                                    selected: _vm.selectedModules.includes(
-                                      theme.id
-                                    )
+                              _c("div", { staticClass: "card" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "checkdiv",
+                                    class: {
+                                      selected: _vm.selectedModules.includes(
+                                        mod.id
+                                      )
+                                    },
+                                    attrs: { for: mod.id + "_check" }
                                   },
-                                  attrs: { for: theme.id + "_check" }
-                                },
-                                [
-                                  _c("img", {
-                                    attrs: { src: "storage/" + theme.logo }
-                                  })
-                                ]
-                              )
+                                  [
+                                    _c("img", {
+                                      attrs: { src: "storage/" + mod.logo }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v(
+                                    "Description: " + _vm._s(mod.description)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v(
+                                    "Time: " + _vm._s(mod.minutes) + " min"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v(
+                                    "Language: " + _vm._s(mod.minutes) + " "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v("Sdgs: " + _vm._s(mod.minutes) + " ")
+                                ])
+                              ])
                             ]
                           )
                         }),
                         0
                       ),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _c("div", { staticStyle: { "text-align": "center" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "site-btn my-4",
+                            attrs: {
+                              "data-toggle": "collapse",
+                              href: "#collapseFour",
+                              "aria-expanded": "false",
+                              "aria-controls": "collapseFour"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.nextToForm("modules")
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Next\n                            "
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ]
                 )
@@ -50557,91 +50747,128 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", { staticClass: "mt-3" }),
                       _vm._v(" "),
+                      _c("h4", [_vm._v("Themes")]),
+                      _vm._v(" "),
                       _c(
                         "div",
-                        {
-                          staticClass:
-                            "row img-block py-4 mx-4 justify-content-center"
-                        },
+                        { staticClass: "row py-4 mx-4 justify-content-center" },
                         _vm._l(_vm.themes, function(theme) {
-                          return _c(
-                            "div",
-                            {
-                              key: theme.id,
-                              staticClass:
-                                "col-xl-2 col-lg-3 col-md-4 big-img-button"
-                            },
-                            [
-                              _c("input", {
-                                directives: [
+                          return _c("div", { key: theme.id }, [
+                            _vm.selectedThemes.includes(theme.id)
+                              ? _c(
+                                  "div",
                                   {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selectedPreview,
-                                    expression: "selectedPreview"
-                                  }
-                                ],
-                                staticClass: "d-none",
-                                attrs: {
-                                  id: theme.id + "_check",
-                                  type: "checkbox"
-                                },
-                                domProps: {
-                                  value: theme.id,
-                                  checked: Array.isArray(_vm.selectedPreview)
-                                    ? _vm._i(_vm.selectedPreview, theme.id) > -1
-                                    : _vm.selectedPreview
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = _vm.selectedPreview,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = theme.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selectedPreview = $$a.concat([
-                                            $$v
-                                          ]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selectedPreview = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
-                                      }
-                                    } else {
-                                      _vm.selectedPreview = $$c
-                                    }
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "checkdiv",
-                                  class: {
-                                    selected: _vm.selectedPreview.includes(
-                                      theme.id
-                                    )
+                                    staticClass:
+                                      "col-xl-2 col-lg-3 col-md-4 big-img-button"
                                   },
-                                  attrs: { for: theme.id + "_check" }
-                                },
-                                [
-                                  _c("img", {
-                                    attrs: { src: "storage/" + theme.logo }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
+                                  [
+                                    _c("img", {
+                                      attrs: { src: "storage/" + theme.logo }
+                                    })
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
                         }),
                         0
                       ),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _c("h4", [_vm._v("Core")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row py-4 mx-4 justify-content-center" },
+                        [
+                          _vm.selectedCore.includes(true)
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: { src: "img/hh_demographics.png" }
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.selectedCore.includes(false)
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: { src: "img/noun_survey.png" }
+                                  })
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Modules")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row py-4 mx-4 justify-content-center" },
+                        _vm._l(_vm.modules, function(mod) {
+                          return _c("div", { key: mod.id }, [
+                            _vm.selectedModules.includes(mod.id)
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "col-xl-2 col-lg-3 col-md-4 big-img-button"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "card" }, [
+                                      _c("img", {
+                                        attrs: { src: "storage/" + mod.logo }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("h5", [
+                                        _vm._v(
+                                          "Description: " +
+                                            _vm._s(mod.description)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("h5", [
+                                        _vm._v(
+                                          "Time: " +
+                                            _vm._s(mod.minutes) +
+                                            " min"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("h5", [
+                                        _vm._v(
+                                          "Language: " +
+                                            _vm._s(mod.minutes) +
+                                            " "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("h5", [
+                                        _vm._v(
+                                          "Sdgs: " + _vm._s(mod.minutes) + " "
+                                        )
+                                      ])
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _vm._m(0)
                     ])
                   ]
                 )
@@ -50673,55 +50900,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                Next\n                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "text-align": "center" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "site-btn my-4",
-          attrs: {
-            "data-toggle": "collapse",
-            href: "#collapse2",
-            "aria-expanded": "true",
-            "aria-controls": "collapse2"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                Next\n                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "text-align": "center" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "site-btn my-4",
-          attrs: {
-            "data-toggle": "collapse",
-            href: "#collapse2",
-            "aria-expanded": "true",
-            "aria-controls": "collapse2"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                Next\n                            "
+            "\n                                Finish\n                            "
           )
         ]
       )
