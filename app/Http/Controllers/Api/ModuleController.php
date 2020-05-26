@@ -15,7 +15,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        return Module::all();
+        $module = Module::with(['sdgs', 'languages'])->get();
+
+        return $module->toJson();
     }
 
     /**
@@ -36,8 +38,7 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-       # dd($request);
-        return $request;
+      
     }
 
     /**
@@ -49,8 +50,8 @@ class ModuleController extends Controller
     public function show(Module $module)
     {
         #$module = Module::with(['sdgs'])->get();
-
-        return $module->json();
+        
+        #return $module->json();
     }
 
     /**

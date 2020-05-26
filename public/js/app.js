@@ -2154,6 +2154,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var rootUrl = "http://localhost:8000";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2174,7 +2177,7 @@ var rootUrl = "http://localhost:8000";
       }],
       themes: [],
       selectedThemes: [],
-      selectedCore: '',
+      selectedCore: true,
       selectedModules: []
     };
   },
@@ -50579,93 +50582,78 @@ var render = function() {
                             "div",
                             { key: mod.id, staticClass: "col-md-4" },
                             [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selectedModules,
-                                    expression: "selectedModules"
-                                  }
-                                ],
-                                staticClass: "d-none",
-                                attrs: {
-                                  id: mod.id + "_check",
-                                  type: "checkbox"
-                                },
-                                domProps: {
-                                  value: mod.id,
-                                  checked: Array.isArray(_vm.selectedModules)
-                                    ? _vm._i(_vm.selectedModules, mod.id) > -1
-                                    : _vm.selectedModules
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = _vm.selectedModules,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = mod.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selectedModules = $$a.concat([
-                                            $$v
-                                          ]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selectedModules = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
+                              _vm.selectedThemes.includes(mod.theme_id)
+                                ? _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selectedModules,
+                                          expression: "selectedModules"
+                                        }
+                                      ],
+                                      staticClass: "d-none",
+                                      attrs: {
+                                        id: mod.id + "_check",
+                                        type: "checkbox"
+                                      },
+                                      domProps: {
+                                        value: mod.id,
+                                        checked: Array.isArray(
+                                          _vm.selectedModules
+                                        )
+                                          ? _vm._i(
+                                              _vm.selectedModules,
+                                              mod.id
+                                            ) > -1
+                                          : _vm.selectedModules
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$a = _vm.selectedModules,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = mod.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selectedModules = $$a.concat(
+                                                  [$$v]
+                                                ))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selectedModules = $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selectedModules = $$c
+                                          }
+                                        }
                                       }
-                                    } else {
-                                      _vm.selectedModules = $$c
-                                    }
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "card" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "checkdiv",
-                                    class: {
-                                      selected: _vm.selectedModules.includes(
-                                        mod.id
-                                      )
-                                    },
-                                    attrs: { for: mod.id + "_check" }
-                                  },
-                                  [
-                                    _c("img", {
-                                      attrs: { src: "storage/" + mod.logo }
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("h5", [
-                                  _vm._v(
-                                    "Description: " + _vm._s(mod.description)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("h5", [
-                                  _vm._v(
-                                    "Time: " + _vm._s(mod.minutes) + " min"
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("h5", [
-                                  _vm._v(
-                                    "Language: " + _vm._s(mod.minutes) + " "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("h5", [
-                                  _vm._v("Sdgs: " + _vm._s(mod.minutes) + " ")
-                                ])
-                              ])
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "checkdiv",
+                                        class: {
+                                          selected: _vm.selectedModules.includes(
+                                            mod.id
+                                          )
+                                        },
+                                        attrs: { for: mod.id + "_check" }
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: { src: "storage/" + mod.logo }
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e()
                             ]
                           )
                         }),

@@ -38,12 +38,12 @@ class Module extends Model
     */
     public function sdgs()
     {
-        return $this->belongToMany(Sdg::class, '_link_modules_sdgs');
+        return $this->belongsToMany(Sdg::class, '_link_modules_sdgs');
     }
 
     public function languages()
     {
-        return $this->belongToMany(language::class, '_link_modules_languages');
+        return $this->belongsToMany(language::class, '_link_modules_languages');
     }
 
     /*

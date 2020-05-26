@@ -96,6 +96,7 @@
                             <h3>Do you want full Core or Reduced Core Rhomis?</h3>
                             <p class="mt-3">Selection options below to begin</p>
                             <div class="row img-block py-4 mx-4 justify-content-center">
+                                        
                                 <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
 
                                     <input
@@ -113,6 +114,7 @@
                                         <img
                                             :src="'storage/core.webp'"
                                         >
+
                                     </label>
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
@@ -180,6 +182,7 @@
                                     :key="mod.id"
                                     class="col-md-4"
                                 >
+                                <div v-if="selectedThemes.includes(mod.theme_id)">
                                     <input
                                         :id="`${mod.id}_check`"
                                         v-model="selectedModules"
@@ -187,7 +190,7 @@
                                         :value="mod.id"
                                         class="d-none"
                                     >
-                                    <div class="card">
+                                    <!-- <div class="card"> -->
                                         
                                         <label
                                             class="checkdiv"
@@ -198,12 +201,13 @@
                                                 :src="'storage/'+mod.logo"
                                             >
                                         </label>
-                                        <h5>Description: {{mod.description}}</h5>
+                                       <!--  <h5>Description: {{mod.description}}</h5>
                                         <h5>Time: {{mod.minutes}} min</h5>
                                         <h5>Language: {{mod.minutes}} </h5>
-                                        <h5>Sdgs: {{mod.minutes}} </h5>
+                                        <h5>Sdgs: {{mod.minutes}} </h5> -->
                                         
-                                    </div>
+                                    <!-- </div> -->
+                                </div>
                                 </div>
                             </div>
                             <div style="text-align: center;">
@@ -290,7 +294,6 @@
                                     <div v-if="selectedModules.includes(mod.id)"
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
-                                   
                                         <img
                                             :src="'storage/'+mod.logo"
                                         >
@@ -342,7 +345,7 @@ const rootUrl = process.env.MIX_APP_URL
                 ],
                 themes: [],
                 selectedThemes: [],
-                selectedCore:'',
+                selectedCore: true,
                 selectedModules:[],
             }
         },
@@ -383,4 +386,6 @@ const rootUrl = process.env.MIX_APP_URL
             }
         }
     }
+
+    
 </script>

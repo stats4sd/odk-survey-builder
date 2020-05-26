@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class FormController extends Controller
 {
@@ -83,5 +85,33 @@ class FormController extends Controller
     public function destroy(Form $form)
     {
         //
+    }
+
+    public function download(Request $request)
+    {
+    	$modules = $request->selectedModules;
+    	dd($modules);
+        $scriptName = 'merge_odk_form.py';
+        $scriptPath = base_path() . '/scripts/' . $scriptName;
+        $base_path = base_path();
+       
+       
+        $file_name = date('c')."rhomis.xlsx";
+       
+        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules}");
+
+        $process->run();
+        
+        if(!$process->isSuccessful()) {
+            
+           throw new ProcessFailedException($process);
+        
+        } else {
+            
+            $process->getOutput();
+        }
+       
+        $path_download =  Storage::url('/odk_forms/'.$file_name);
+        return response()->json(['path' => $path_download]);
     }
 }
