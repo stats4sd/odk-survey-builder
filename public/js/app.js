@@ -2154,9 +2154,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var rootUrl = "http://localhost:8000";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50413,7 +50410,7 @@ var render = function() {
                                 },
                                 [
                                   _c("img", {
-                                    attrs: { src: "img/hh_demographics.png" }
+                                    attrs: { src: "storage/core.webp" }
                                   })
                                 ]
                               )
@@ -50482,7 +50479,7 @@ var render = function() {
                                 },
                                 [
                                   _c("img", {
-                                    attrs: { src: "img/noun_survey.png" }
+                                    attrs: { src: "storage/other_modules.jpg" }
                                   })
                                 ]
                               )
@@ -50797,7 +50794,7 @@ var render = function() {
                                 },
                                 [
                                   _c("img", {
-                                    attrs: { src: "img/hh_demographics.png" }
+                                    attrs: { src: "storage/core.webp" }
                                   })
                                 ]
                               )
@@ -50812,7 +50809,7 @@ var render = function() {
                                 },
                                 [
                                   _c("img", {
-                                    attrs: { src: "img/noun_survey.png" }
+                                    attrs: { src: "storage/other_modules.jpg" }
                                   })
                                 ]
                               )
@@ -50835,40 +50832,9 @@ var render = function() {
                                       "col-xl-2 col-lg-3 col-md-4 big-img-button"
                                   },
                                   [
-                                    _c("div", { staticClass: "card" }, [
-                                      _c("img", {
-                                        attrs: { src: "storage/" + mod.logo }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          "Description: " +
-                                            _vm._s(mod.description)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          "Time: " +
-                                            _vm._s(mod.minutes) +
-                                            " min"
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          "Language: " +
-                                            _vm._s(mod.minutes) +
-                                            " "
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          "Sdgs: " + _vm._s(mod.minutes) + " "
-                                        )
-                                      ])
-                                    ])
+                                    _c("img", {
+                                      attrs: { src: "storage/" + mod.logo }
+                                    })
                                   ]
                                 )
                               : _vm._e()

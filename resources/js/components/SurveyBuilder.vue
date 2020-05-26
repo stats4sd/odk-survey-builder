@@ -111,7 +111,7 @@
                                         :class="{ 'selected' : selectedCore == true}"
                                     >
                                         <img
-                                            :src="'img/hh_demographics.png'"
+                                            :src="'storage/core.webp'"
                                         >
                                     </label>
                                     </div>
@@ -129,7 +129,7 @@
                                         :class="{ 'selected' : selectedCore == false}"
                                     >
                                         <img
-                                            :src="'img/noun_survey.png'"
+                                            :src="'storage/other_modules.jpg'"
                                         >
                                     </label>
                                 </div>
@@ -269,14 +269,14 @@
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'img/hh_demographics.png'"
+                                        :src="'storage/core.webp'"
                                     >
                                 </div>
                                 <div v-if="selectedCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'img/noun_survey.png'"
+                                        :src="'storage/other_modules.jpg'"
                                     >
                                 </div>
                             </div>
@@ -290,15 +290,12 @@
                                     <div v-if="selectedModules.includes(mod.id)"
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
-                                    <div class="card">
+                                   
                                         <img
                                             :src="'storage/'+mod.logo"
                                         >
-                                        <h5>Description: {{mod.description}}</h5>
-                                        <h5>Time: {{mod.minutes}} min</h5>
-                                        <h5>Language: {{mod.minutes}} </h5>
-                                        <h5>Sdgs: {{mod.minutes}} </h5>
-                                    </div>
+                                       
+                             
                                 </div>
                             </div>  
                             </div>
