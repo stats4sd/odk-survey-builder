@@ -381,7 +381,12 @@ const rootUrl = process.env.MIX_APP_URL
                         selectedCore: this.selectedCore,
                         selectedModules: this.selectedModules,
                     }
-                });
+                })
+                .then((result) => {
+                    window.location.href = result.data['path'];
+                }, (error) => {
+                    console.log(error);
+                });                   
 
             }
         }

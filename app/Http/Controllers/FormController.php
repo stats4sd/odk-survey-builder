@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Storage;
 
 class FormController extends Controller
 {
@@ -36,8 +38,7 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-       	#dd($request);
-        #return $request;
+       	
     }
 
     /**
@@ -48,9 +49,7 @@ class FormController extends Controller
      */
     public function show(Form $form)
     {
-        
 
-        
     }
 
     /**
@@ -90,15 +89,25 @@ class FormController extends Controller
     public function download(Request $request)
     {
     	$modules = $request->selectedModules;
-    	dd($modules);
+    	$modules_list = "'";
+    		
+    	foreach ($modules as $id) {
+    		$module = Module::where('id',$id)->first();
+    		$file_name = $module->file;
+    		$modules_list .= $file_name.',';
+    	}
+    	$modules_list = substr($modules_list, 0, -1);
+    	$modules_list .= "'";
+ 
         $scriptName = 'merge_odk_form.py';
         $scriptPath = base_path() . '/scripts/' . $scriptName;
         $base_path = base_path();
+       	$date = str_replace(':', '', date('c'));
+       	$date = str_replace('-', '', $date);
+       	$date = str_replace('+', '', $date);
+        $file_name = $date."rhomis.xlsx";
        
-       
-        $file_name = date('c')."rhomis.xlsx";
-       
-        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules}");
+        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules_list}");
 
         $process->run();
         
@@ -110,8 +119,9 @@ class FormController extends Controller
             
             $process->getOutput();
         }
-       
+
         $path_download =  Storage::url('/odk_forms/'.$file_name);
+
         return response()->json(['path' => $path_download]);
     }
 }

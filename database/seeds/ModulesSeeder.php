@@ -21,6 +21,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '0',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
 
         	],
         	[
@@ -31,6 +32,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'3',
@@ -40,6 +42,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '5',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'4',
@@ -49,6 +52,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '10',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'5',
@@ -58,6 +62,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '5',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'6',
@@ -67,6 +72,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '10',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'7',
@@ -76,6 +82,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'8',
@@ -85,6 +92,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'9',
@@ -94,6 +102,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '5',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'
         	],
         	[
 	        	'id' =>'10',
@@ -103,6 +112,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '7',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'
         	],
         	[
 	        	'id' =>'11',
@@ -112,7 +122,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '6',
 	            'minutes' => '7',
 	            'core' => '1',
-        	],
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'       	],
         	[
 	        	'id' =>'12',
 	            'title' => 'CREDIT, AID, AND DEBTS',
@@ -121,6 +131,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'13',
@@ -130,6 +141,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '4',
 	            'core' => '1',
+	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
 	        	'id' =>'14',
@@ -139,6 +151,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '5',
 	            'minutes' => '7',
 	            'core' => '0',
+	            'file' => 'Module-Agroforestry.xlsx',
         	],
         	[
 	        	'id' =>'15',
@@ -148,6 +161,8 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '3',
 	            'core' => '0',
+	            'file' => 'Module-Livestock_feeding.xlsx',
+
         	],
         	[
 	        	'id' =>'16',
@@ -157,6 +172,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '7',
 	            'core' => '0',
+	            'file' => 'Module-Bushmeat.xlsx',
         	],
         	[
 	        	'id' =>'17',
@@ -166,6 +182,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '15',
 	            'core' => '0',
+	            'file' => 'Module-Cattle_detailed.xlsx',
         	],
         	[
 	        	'id' =>'18',
@@ -175,6 +192,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '7',
 	            'core' => '0',
+	            'file' => 'Module-Changes on Farm.xlsx',
         	],
         	[
 	        	'id' =>'19',
@@ -184,6 +202,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '5',
 	            'core' => '0',
+	            'file' => 'Module-Coping_strategy.xlsx',
         	],
         	[
 	        	'id' =>'20',
@@ -193,6 +212,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Disability.xlsx',
         	],
         	[
 	        	'id' =>'21',
@@ -202,6 +222,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-FIES.xlsx',
         	],
         	[
 	        	'id' =>'22',
@@ -211,6 +232,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-HFIAS.xlsx',
         	],
         	[
 	        	'id' =>'23',
@@ -220,6 +242,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-MDDW.xlsx',
         	],
         	[
 	        	'id' =>'24',
@@ -229,6 +252,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '2',
 	            'core' => '0',
+	            'file' => 'Module-Financial_situation.xlsx',
         	],
         	[
 	        	'id' =>'25',
@@ -238,6 +262,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '3',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Food_environments.xlsx',
         	],
         	[
 	        	'id' =>'26',
@@ -247,6 +272,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Innovation.xlsx',
         	],
         	[
 	        	'id' =>'27',
@@ -256,6 +282,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Expenditures.xlsx',
         	],
         	[
 	        	'id' =>'28',
@@ -265,6 +292,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Membership_groups.xlsx',
         	],
         	[
 	        	'id' =>'29',
@@ -274,6 +302,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-NRM_perception.xlsx',
         	],
         	[
 	        	'id' =>'30',
@@ -283,6 +312,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '5',
 	            'core' => '0',
+	            'file' => 'Module-Relative_Vulnerability.xlsx',
         	],
         	[
 	        	'id' =>'31',
@@ -292,6 +322,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '5',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-SlashnBurn.xlsx',
         	],
         	[
 	        	'id' =>'32',
@@ -301,6 +332,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '10',
 	            'core' => '0',
+	            'file' => 'Module-Uptake_of_interventions.xlsx',
         	],
         	[
 	        	'id' =>'33',
@@ -310,6 +342,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '1',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-Value_orientations.xlsx',
         	],
         	[
 	        	'id' =>'34',
@@ -319,6 +352,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '4',
 	            'minutes' => '4',
 	            'core' => '0',
+	            'file' => 'Module-WASH.xlsx',
         	],
         	[
 	        	'id' =>'35',
@@ -328,6 +362,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '5',
 	            'minutes' => '7',
 	            'core' => '0',
+	            'file' => 'Module-Forest_products.xlsx',
         	],
         	[
 	        	'id' =>'36',
@@ -337,6 +372,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '6',
 	            'minutes' => '5',
 	            'core' => '0',
+	            'file' => 'Module-Voice_choice_control.xlsx',
         	],
         	[
 	        	'id' =>'37',
@@ -346,6 +382,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '5',
 	            'minutes' => '8',
 	            'core' => '0',
+	            'file' => 'Module-Forest_governance.xlsx',
         	],
         	[
 	        	'id' =>'38',
@@ -355,6 +392,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '60',
 	            'core' => '0',
+	            'file' => 'Module-Plot_level_land_use_boundaries.xlsx',
         	],
         	[
 	        	'id' =>'39',
@@ -364,6 +402,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '6',
 	            'minutes' => '8',
 	            'core' => '0',
+	            'file' => 'Module-Gender_attitudes.xlsx',
         	],
         	[
 	        	'id' =>'40',
@@ -373,6 +412,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '6',
 	            'minutes' => '8',
 	            'core' => '0',
+	            'file' => 'Module-Gender_labour_time.xlsx',
         	],
         	[
 	        	'id' =>'41',
@@ -382,6 +422,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '10',
 	            'core' => '0',
+	            'file' => 'Module-Crop_pests.xlsx',
         	],
         	[
 	        	'id' =>'42',
@@ -391,6 +432,7 @@ class ModulesSeeder extends Seeder
 	            'theme_id' => '2',
 	            'minutes' => '5',
 	            'core' => '0',
+	            'file' => 'Module-Seed_varieties.xlsx',
         	],
         ]);
     }

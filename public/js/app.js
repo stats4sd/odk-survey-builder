@@ -2210,6 +2210,10 @@ var rootUrl = "http://localhost:8000";
           selectedCore: this.selectedCore,
           selectedModules: this.selectedModules
         }
+      }).then(function (result) {
+        window.location.href = result.data['path'];
+      }, function (error) {
+        console.log(error);
       });
     }
   }
