@@ -388,7 +388,7 @@ const rootUrl = process.env.MIX_APP_URL
         watch: {
             selectedThemes() {
        
-                return this.modulesFilter = this.modules.filter(module => module.theme_id.includes(this.selectedThemes));
+                this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
                 console.log(this.modulesFilter);
             }
         },
@@ -397,10 +397,13 @@ const rootUrl = process.env.MIX_APP_URL
             nextToForm: function (message) {
                 if(message=='themes') {
                     this.currentStep = 2;
+                    $('#collapseOne').collapse('hide');
                 } else if(message=='core') {
                     this.currentStep = 3;
+                    $('#collapseTwo').collapse('hide');
                 } else if(message=='modules') {
                     this.currentStep = 4;
+                    $('#collapseThree').collapse('hide');
                 }
             },
             submit: function(event){
@@ -417,7 +420,7 @@ const rootUrl = process.env.MIX_APP_URL
                     }
                 })
                 .then((result) => {
-                    // window.location.href = result.data['path'];
+                    window.location.href = result.data['path'];
                 }, (error) => {
                     console.log(error);
                 });                   
@@ -425,5 +428,6 @@ const rootUrl = process.env.MIX_APP_URL
             }
         }
     }
+
 
 </script>

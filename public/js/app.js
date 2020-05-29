@@ -2218,8 +2218,8 @@ var rootUrl = "http://localhost:8000";
     selectedThemes: function selectedThemes() {
       var _this2 = this;
 
-      return this.modulesFilter = this.modules.filter(function (module) {
-        return module.theme_id.includes(_this2.selectedThemes);
+      this.modulesFilter = this.modules.filter(function (module) {
+        return _this2.selectedThemes.includes(module.theme_id);
       });
       console.log(this.modulesFilter);
     }
@@ -2228,10 +2228,13 @@ var rootUrl = "http://localhost:8000";
     nextToForm: function nextToForm(message) {
       if (message == 'themes') {
         this.currentStep = 2;
+        $('#collapseOne').collapse('hide');
       } else if (message == 'core') {
         this.currentStep = 3;
+        $('#collapseTwo').collapse('hide');
       } else if (message == 'modules') {
         this.currentStep = 4;
+        $('#collapseThree').collapse('hide');
       }
     },
     submit: function submit(event) {
@@ -2246,7 +2249,8 @@ var rootUrl = "http://localhost:8000";
           formId: this.formId,
           defaultLanguage: this.defaultLanguage
         }
-      }).then(function (result) {// window.location.href = result.data['path'];
+      }).then(function (result) {
+        window.location.href = result.data['path'];
       }, function (error) {
         console.log(error);
       });

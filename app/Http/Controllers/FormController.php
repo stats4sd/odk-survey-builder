@@ -123,7 +123,7 @@ class FormController extends Controller
             
             $process->getOutput();
         }
-
+        $file_name= '20200529T1631290000title.xlsx';
         $path_download = Storage::url('/odk_forms/'.$file_name);
 
         return response()->json(['path' => $path_download]);
