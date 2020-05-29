@@ -58,7 +58,7 @@
                             </div>
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="collapse" href="#collapseTwo"
-                                    aria-expanded="true" aria-controls="collapseTwo"  v-on:click="nextToForm('themes')">
+                                    aria-expanded="false" aria-controls="collapseTwo"  v-on:click="nextToForm('themes')">
                                     Next
                                 </button>
                             </div>
@@ -178,11 +178,11 @@
                             <p class="mt-3">Selection options below to begin</p>
                             <div class="row py-4 mx-4 justify-content-center">
                                 <div
-                                    v-for="mod in modules"
+                                    v-for="mod in modulesFilter"
                                     :key="mod.id"
                                     class="col-md-4"
                                 >
-                                <div v-if="selectedThemes.includes(mod.theme_id)">
+                                
                                     <input
                                         :id="`${mod.id}_check`"
                                         v-model="selectedModules"
@@ -207,7 +207,7 @@
                                         <h5>Sdgs: {{mod.minutes}} </h5> -->
                                         
                                     <!-- </div> -->
-                                </div>
+                                
                                 </div>
                             </div>
                             <div style="text-align: center;">
@@ -299,9 +299,28 @@
                                         >
                                        
                              
-                                </div>
-                            </div>  
+                                    </div>
+                                </div>  
                             </div>
+                            <h4>Settings</h4>
+                            <div class="row py-4 mx-4 justify-content-center">
+                      
+                                <div class="col-md-4">
+                                    <h5>Form Title</h5>
+                                    <input v-model="formTitle" placeholder="Insert the title">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h5>Form Id</h5>
+                                    <input v-model="formId" placeholder="Insert the id">
+                                </div>
+
+                                 <div class="col-md-4">
+                                    <h5>Default Language</h5>
+                                    <input v-model="defaultLanguage" placeholder="Insert the default language">
+                                </div>
+                            </div>
+
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="" href=""
                                     aria-expanded="false" aria-controls="" v-on:click='submit'>
@@ -344,9 +363,13 @@ const rootUrl = process.env.MIX_APP_URL
                     },
                 ],
                 themes: [],
+                modulesFilter: [],
                 selectedThemes: [],
                 selectedCore: true,
                 selectedModules:[],
+                formTitle: '',
+                formId: '',
+                defaultLanguage: '',
             }
         },
 
@@ -354,12 +377,20 @@ const rootUrl = process.env.MIX_APP_URL
 
             axios.get('api/themes').then((response) => {
                 this.themes = response.data;
+
             }),
 
             axios.get('api/modules').then((response) => {
                 this.modules = response.data;
                 console.log(this.modules);
             })
+        },
+        watch: {
+            selectedThemes() {
+       
+                return this.modulesFilter = this.modules.filter(module => module.theme_id.includes(this.selectedThemes));
+                console.log(this.modulesFilter);
+            }
         },
 
         methods: {
@@ -380,10 +411,13 @@ const rootUrl = process.env.MIX_APP_URL
                         selectedThemes: this.selectedThemes,
                         selectedCore: this.selectedCore,
                         selectedModules: this.selectedModules,
+                        formTitle: this.formTitle,
+                        formId: this.formId,
+                        defaultLanguage: this.defaultLanguage,
                     }
                 })
                 .then((result) => {
-                    window.location.href = result.data['path'];
+                    // window.location.href = result.data['path'];
                 }, (error) => {
                     console.log(error);
                 });                   
@@ -392,5 +426,4 @@ const rootUrl = process.env.MIX_APP_URL
         }
     }
 
-    
 </script>

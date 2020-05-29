@@ -2157,6 +2157,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var rootUrl = "http://localhost:8000";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2176,9 +2195,13 @@ var rootUrl = "http://localhost:8000";
         'title': "Preview and Finish"
       }],
       themes: [],
+      modulesFilter: [],
       selectedThemes: [],
       selectedCore: true,
-      selectedModules: []
+      selectedModules: [],
+      formTitle: '',
+      formId: '',
+      defaultLanguage: ''
     };
   },
   mounted: function mounted() {
@@ -2190,6 +2213,16 @@ var rootUrl = "http://localhost:8000";
       _this.modules = response.data;
       console.log(_this.modules);
     });
+  },
+  watch: {
+    selectedThemes: function selectedThemes() {
+      var _this2 = this;
+
+      return this.modulesFilter = this.modules.filter(function (module) {
+        return module.theme_id.includes(_this2.selectedThemes);
+      });
+      console.log(this.modulesFilter);
+    }
   },
   methods: {
     nextToForm: function nextToForm(message) {
@@ -2208,10 +2241,12 @@ var rootUrl = "http://localhost:8000";
         data: {
           selectedThemes: this.selectedThemes,
           selectedCore: this.selectedCore,
-          selectedModules: this.selectedModules
+          selectedModules: this.selectedModules,
+          formTitle: this.formTitle,
+          formId: this.formId,
+          defaultLanguage: this.defaultLanguage
         }
-      }).then(function (result) {
-        window.location.href = result.data['path'];
+      }).then(function (result) {// window.location.href = result.data['path'];
       }, function (error) {
         console.log(error);
       });
@@ -50276,7 +50311,7 @@ var render = function() {
                             attrs: {
                               "data-toggle": "collapse",
                               href: "#collapseTwo",
-                              "aria-expanded": "true",
+                              "aria-expanded": "false",
                               "aria-controls": "collapseTwo"
                             },
                             on: {
@@ -50581,83 +50616,74 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "row py-4 mx-4 justify-content-center" },
-                        _vm._l(_vm.modules, function(mod) {
+                        _vm._l(_vm.modulesFilter, function(mod) {
                           return _c(
                             "div",
                             { key: mod.id, staticClass: "col-md-4" },
                             [
-                              _vm.selectedThemes.includes(mod.theme_id)
-                                ? _c("div", [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.selectedModules,
-                                          expression: "selectedModules"
-                                        }
-                                      ],
-                                      staticClass: "d-none",
-                                      attrs: {
-                                        id: mod.id + "_check",
-                                        type: "checkbox"
-                                      },
-                                      domProps: {
-                                        value: mod.id,
-                                        checked: Array.isArray(
-                                          _vm.selectedModules
-                                        )
-                                          ? _vm._i(
-                                              _vm.selectedModules,
-                                              mod.id
-                                            ) > -1
-                                          : _vm.selectedModules
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$a = _vm.selectedModules,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = mod.id,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.selectedModules = $$a.concat(
-                                                  [$$v]
-                                                ))
-                                            } else {
-                                              $$i > -1 &&
-                                                (_vm.selectedModules = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
-                                            }
-                                          } else {
-                                            _vm.selectedModules = $$c
-                                          }
-                                        }
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selectedModules,
+                                    expression: "selectedModules"
+                                  }
+                                ],
+                                staticClass: "d-none",
+                                attrs: {
+                                  id: mod.id + "_check",
+                                  type: "checkbox"
+                                },
+                                domProps: {
+                                  value: mod.id,
+                                  checked: Array.isArray(_vm.selectedModules)
+                                    ? _vm._i(_vm.selectedModules, mod.id) > -1
+                                    : _vm.selectedModules
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.selectedModules,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = mod.id,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.selectedModules = $$a.concat([
+                                            $$v
+                                          ]))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.selectedModules = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
                                       }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "checkdiv",
-                                        class: {
-                                          selected: _vm.selectedModules.includes(
-                                            mod.id
-                                          )
-                                        },
-                                        attrs: { for: mod.id + "_check" }
-                                      },
-                                      [
-                                        _c("img", {
-                                          attrs: { src: "storage/" + mod.logo }
-                                        })
-                                      ]
+                                    } else {
+                                      _vm.selectedModules = $$c
+                                    }
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "checkdiv",
+                                  class: {
+                                    selected: _vm.selectedModules.includes(
+                                      mod.id
                                     )
-                                  ])
-                                : _vm._e()
+                                  },
+                                  attrs: { for: mod.id + "_check" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: { src: "storage/" + mod.logo }
+                                  })
+                                ]
+                              )
                             ]
                           )
                         }),
@@ -50833,6 +50859,91 @@ var render = function() {
                           ])
                         }),
                         0
+                      ),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Settings")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row py-4 mx-4 justify-content-center" },
+                        [
+                          _c("div", { staticClass: "col-md-4" }, [
+                            _c("h5", [_vm._v("Form Title")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formTitle,
+                                  expression: "formTitle"
+                                }
+                              ],
+                              attrs: { placeholder: "Insert the title" },
+                              domProps: { value: _vm.formTitle },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.formTitle = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-4" }, [
+                            _c("h5", [_vm._v("Form Id")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formId,
+                                  expression: "formId"
+                                }
+                              ],
+                              attrs: { placeholder: "Insert the id" },
+                              domProps: { value: _vm.formId },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.formId = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-4" }, [
+                            _c("h5", [_vm._v("Default Language")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.defaultLanguage,
+                                  expression: "defaultLanguage"
+                                }
+                              ],
+                              attrs: {
+                                placeholder: "Insert the default language"
+                              },
+                              domProps: { value: _vm.defaultLanguage },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.defaultLanguage = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]
                       ),
                       _vm._v(" "),
                       _c("div", { staticStyle: { "text-align": "center" } }, [

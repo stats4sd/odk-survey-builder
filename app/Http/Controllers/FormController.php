@@ -89,6 +89,10 @@ class FormController extends Controller
     public function download(Request $request)
     {
     	$modules = $request->selectedModules;
+        $core = $request->selectedCore;
+        $form_title = $request->formTitle;
+        $form_id = $request->formId;
+        $default_language = $request->defaultLanguage;
     	$modules_list = "'";
     		
     	foreach ($modules as $id) {
@@ -105,9 +109,9 @@ class FormController extends Controller
        	$date = str_replace(':', '', date('c'));
        	$date = str_replace('-', '', $date);
        	$date = str_replace('+', '', $date);
-        $file_name = $date."rhomis.xlsx";
+        $file_name = $date.$form_title.".xlsx";
        
-        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules_list}");
+        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
         $process->run();
         
@@ -120,7 +124,7 @@ class FormController extends Controller
             $process->getOutput();
         }
 
-        $path_download =  Storage::url('/odk_forms/'.$file_name);
+        $path_download = Storage::url('/odk_forms/'.$file_name);
 
         return response()->json(['path' => $path_download]);
     }
