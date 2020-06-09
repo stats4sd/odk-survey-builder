@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasImageUploads;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Module;
 
 class Sdg extends Model
 {
@@ -33,6 +34,10 @@ class Sdg extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function modules ()
+    {
+        return $this->belongsToMany(Module::class, '_link_modules_sdgs','module_id','sdg_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
