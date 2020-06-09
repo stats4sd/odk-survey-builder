@@ -17,7 +17,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -38,7 +38,7 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-       	
+
     }
 
     /**
@@ -94,7 +94,7 @@ class FormController extends Controller
         $form_id = $request->formId;
         $default_language = $request->defaultLanguage;
     	$modules_list = "'";
-    		
+
     	foreach ($modules as $id) {
     		$module = Module::where('id',$id)->first();
     		$file_name = $module->file;
@@ -102,7 +102,7 @@ class FormController extends Controller
     	}
     	$modules_list = substr($modules_list, 0, -1);
     	$modules_list .= "'";
- 
+
         $scriptName = 'merge_odk_form.py';
         $scriptPath = base_path() . '/scripts/' . $scriptName;
         $base_path = base_path();
@@ -110,17 +110,17 @@ class FormController extends Controller
        	$date = str_replace('-', '', $date);
        	$date = str_replace('+', '', $date);
         $file_name = $date.$form_title.".xlsx";
-       
-        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+
+        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
         $process->run();
-        
+
         if(!$process->isSuccessful()) {
-            
+
            throw new ProcessFailedException($process);
-        
+
         } else {
-            
+
             $process->getOutput();
         }
         $file_name= '20200529T1631290000title.xlsx';
