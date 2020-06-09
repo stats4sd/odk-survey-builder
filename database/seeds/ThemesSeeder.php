@@ -14,44 +14,44 @@ class ThemesSeeder extends Seeder
     {
         DB::table('themes')->insert([
         	[
-	        	'id' =>'1',
+	        	'id' => 'decision-making',
 	            'title' => 'Decision Making',
 	            'logo' => '/decision_making.png',
 	            'description' => '',
         	],
         	[
-	        	'id' =>'2',
+	        	'id' => 'on-farm',
 	            'title' => 'On Farm',
 	            'logo' => '/on_farm.png',
 	            'description' => '',
         	],
         	[
-	        	'id' =>'3',
+	        	'id' => 'food',
 	            'title' => 'Food',
 	            'logo' => '/food.png',
 	            'description' => '',
         	],
         	[
-	        	'id' =>'4',
+	        	'id' => 'poverty-dynamics',
 	            'title' => 'Poverty Dynamics',
 	            'logo' => '/poverty_dynamics.png',
 	            'description' => '',
         	],
         	[
-	        	'id' =>'5',
+	        	'id' => 'trees',
 	            'title' => 'Trees',
 	            'logo' => '/trees.png',
 	            'description' => '',
         	],
         	[
-	        	'id' =>'6',
+	        	'id' => 'gender',
 	            'title' => 'Gender',
 	            'logo' => '/gender.png',
 	            'description' => '',
         	],
 
 
-        	
+
         ]);
     }
 }

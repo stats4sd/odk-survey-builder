@@ -14,7 +14,7 @@ class CreateSdgsTable extends Migration
     public function up()
     {
         Schema::create('sdgs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('label');
             $table->string('logo');
             $table->timestamps();

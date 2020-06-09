@@ -14,18 +14,18 @@ class ModulesSeeder extends Seeder
     {
         DB::table('modules')->insert([
         	[
-	        	'id' =>'1',
+	        	'id' => 'metadata',
 	            'title' => 'Metadata',
 	            'logo' => '/metadata.png',
 	            'description' => 'Enumerator data, time and date, location, GPS, consent, enumerator notes',
 	            'theme_id' => '0',
 	            'minutes' => '4',
 	            'core' => '1',
-	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
+	            // 'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
 
         	],
         	[
-	        	'id' =>'2',
+	        	'id' => 'household-demographics',
 	            'title' => 'HOUSEHOLD DEMOGRAPHICS',
 	            'logo' => '/household_demographics.png',
 	            'description' => 'Name, sex, age, education, h/h population',
@@ -35,7 +35,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'3',
+	        	'id' => 'land-use',
 	            'title' => 'LAND USE',
 	            'logo' => '/land_use.png',
 	            'description' => 'Tenure, cultivation, land area, slope, labour',
@@ -45,7 +45,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'4',
+	        	'id' => 'crop-production-and-use',
 	            'title' => 'CROP PRODUCTION AND USE',
 	            'logo' => '/crop_production_and_use.png',
 	            'description' => 'Crop types, planting seasons, yield, use of land, post-harvest, sales, residues, crop products, planning',
@@ -55,7 +55,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'5',
+	        	'id' => 'agricultural-inputs-and-management',
 	            'title' => 'AGRICULTURAL INPUTS AND MANAGEMENT',
 	            'logo' => '/agricultural_inputs_and_management.png',
 	            'description' => 'Fertilisers, pesticides, improved seed, storage, irrigation, agroforestry, tillage',
@@ -65,7 +65,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'6',
+	        	'id' => 'livestock',
 	            'title' => 'LIVESTOCK',
 	            'logo' => '/livestock.png',
 	            'description' => 'Livestock types, numbers, grazing land, pens/stabling use of animals, buying, selling, slaughtering, eating, medicine, dairy/egg/honey/wool',
@@ -75,7 +75,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'7',
+	        	'id' => 'wildfoods',
 	            'title' => 'WILDFOODS',
 	            'logo' => '/wildfoods.png',
 	            'description' => 'Gathering, types, time of year, processing, sales',
@@ -85,7 +85,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'8',
+	        	'id' => 'food-security-and-hunger',
 	            'title' => 'FOOD SECURITY AND HUNGER',
 	            'logo' => '/food_security_and_hunger.png',
 	            'description' => 'Hunger months, HFIAS or FIES indicator',
@@ -95,7 +95,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'9',
+	        	'id' => 'household-dietary-diversity',
 	            'title' => 'HOUSEHOLD DIETARY DIVERSITY',
 	            'logo' => '/house_dietary_diversity.png',
 	            'description' => 'HDDS score during lean and post-harvest seasons, and sourcing of foodstuffs',
@@ -105,7 +105,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'
         	],
         	[
-	        	'id' =>'10',
+	        	'id' => 'off-farm-income',
 	            'title' => 'OFF-FARM INCOME',
 	            'logo' => '/off_farm_income.png',
 	            'description' => 'Sources of income, time of year, planning, spending',
@@ -115,7 +115,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'
         	],
         	[
-	        	'id' =>'11',
+	        	'id' => 'gendered-control-of-produce-and-incomes',
 	            'title' => 'GENDERED CONTROL OF PRODUCE AND INCOMES',
 	            'logo' => '/gender_control_of_produce_and_incomes.png',
 	            'description' => 'Sources of income, time of year, planning, spending',
@@ -124,7 +124,7 @@ class ModulesSeeder extends Seeder
 	            'core' => '1',
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx'       	],
         	[
-	        	'id' =>'12',
+	        	'id' => 'credit-aid-and-debts',
 	            'title' => 'CREDIT, AID, AND DEBTS',
 	            'logo' => '/credit_aid_and_debts.png',
 	            'description' => 'Government/NGO assistance, support from friends, type of aid, access to credit',
@@ -134,7 +134,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'13',
+	        	'id' => 'probability-of-poverty-indicator',
 	            'title' => 'PROBABILITY OF POVERTY INDICATOR',
 	            'logo' => '/probability_of_poverty_indicator.png',
 	            'description' => 'Asset-based rapid poverty indicator',
@@ -144,7 +144,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Rhomis_core_v1.6draftv5_Nov12.xlsx',
         	],
         	[
-	        	'id' =>'14',
+	        	'id' => 'agroforestry',
 	            'title' => 'AGROFORESTRY',
 	            'logo' => '/agroforestry.png',
 	            'description' => 'Use of trees, quantity of trees used, species, management',
@@ -154,7 +154,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Agroforestry.xlsx',
         	],
         	[
-	        	'id' =>'15',
+	        	'id' => 'livestock-feeding',
 	            'title' => 'LIVESTOCK FEEDING',
 	            'logo' => '/livestock_feeding.png',
 	            'description' => 'Type of feed, grazing, bought feeds',
@@ -165,7 +165,7 @@ class ModulesSeeder extends Seeder
 
         	],
         	[
-	        	'id' =>'16',
+	        	'id' => 'bushmeat',
 	            'title' => 'BUSHMEAT',
 	            'logo' => '/bushmeat.png',
 	            'description' => 'Hunting and trapping, species, and frequency',
@@ -175,7 +175,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Bushmeat.xlsx',
         	],
         	[
-	        	'id' =>'17',
+	        	'id' => 'cattle-detailed',
 	            'title' => 'CATTLE DETAILED',
 	            'logo' => '/cattle_detailed.png',
 	            'description' => 'Herd structure, age, sex, breeding, milking, diseases and health treatments',
@@ -185,7 +185,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Cattle_detailed.xlsx',
         	],
         	[
-	        	'id' =>'18',
+	        	'id' => 'changes-on-farm',
 	            'title' => 'CHANGES ON FARM',
 	            'logo' => '/changes_on_farm.png',
 	            'description' => 'Changes over past few years: land, crop types and yields, inputs, livestock, sales, incomes, off farm work, reasons for changes',
@@ -195,7 +195,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Changes on Farm.xlsx',
         	],
         	[
-	        	'id' =>'19',
+	        	'id' => 'coping-strategies',
 	            'title' => 'COPING STRATEGIES',
 	            'logo' => '/coping_strategies.png',
 	            'description' => 'Coping strategy index (CSI), changes of food access over the year',
@@ -205,7 +205,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Coping_strategy.xlsx',
         	],
         	[
-	        	'id' =>'20',
+	        	'id' => 'disability',
 	            'title' => 'DISABILITY',
 	            'logo' => '/disability.png',
 	            'description' => 'Quantification of disabled individuals in household (Washington Group questions)',
@@ -215,7 +215,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Disability.xlsx',
         	],
         	[
-	        	'id' =>'21',
+	        	'id' => 'fies',
 	            'title' => 'FIES',
 	            'logo' => '/food_insecurity_experience_scale.png',
 	            'description' => 'Food Insecurity Experience Scale (FIES)',
@@ -225,7 +225,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-FIES.xlsx',
         	],
         	[
-	        	'id' =>'22',
+	        	'id' => 'hfias',
 	            'title' => 'HFIAS',
 	            'logo' => '/household_food_insecurity_access_scale.png',
 	            'description' => 'Household Food Insecurity of Access Scale (HFIAS)',
@@ -235,7 +235,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-HFIAS.xlsx',
         	],
         	[
-	        	'id' =>'23',
+	        	'id' => 'mdd-w',
 	            'title' => 'MDD-W',
 	            'logo' => '/minimun_dietary_diversity_for_women.png',
 	            'description' => 'Minimum Dietary Diversity for Women (open recall or closed categories)',
@@ -245,7 +245,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-MDDW.xlsx',
         	],
         	[
-	        	'id' =>'24',
+	        	'id' => 'financial-situation',
 	            'title' => 'FINANCIAL SITUATION',
 	            'logo' => '/financial_situation.png',
 	            'description' => 'Self-identified purchasing power',
@@ -255,7 +255,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Financial_situation.xlsx',
         	],
         	[
-	        	'id' =>'25',
+	        	'id' => 'food-environments',
 	            'title' => 'FOOD ENVIRONMENTS',
 	            'logo' => '/food_environments.png',
 	            'description' => 'Market access, packaged food',
@@ -265,7 +265,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Food_environments.xlsx',
         	],
         	[
-	        	'id' =>'26',
+	        	'id' => 'innovation',
 	            'title' => 'INNOVATION',
 	            'logo' => '/innovation.png',
 	            'description' => 'Farm plans, adoption of new technologies, aspirations, life satisfaction',
@@ -275,7 +275,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Innovation.xlsx',
         	],
         	[
-	        	'id' =>'27',
+	        	'id' => 'expenditures',
 	            'title' => 'EXPENDITURES',
 	            'logo' => '/expenditures.png',
 	            'description' => 'Sources of income, spending of income - family costs, farm costs, giving to others',
@@ -285,7 +285,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Expenditures.xlsx',
         	],
         	[
-	        	'id' =>'28',
+	        	'id' => 'membership-of-groups',
 	            'title' => 'MEMBERSHIP OF GROUPS',
 	            'logo' => '/membership_of_groups.png',
 	            'description' => 'Farmer groups, credit unions, cooperatives, leadership roles',
@@ -295,7 +295,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Membership_groups.xlsx',
         	],
         	[
-	        	'id' =>'29',
+	        	'id' => 'nrm-perception',
 	            'title' => 'NRM PERCEPTION',
 	            'logo' => '/nrm_perception.png',
 	            'description' => 'Change of experience relating to soil, water, weather, fauna, trees',
@@ -305,7 +305,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-NRM_perception.xlsx',
         	],
         	[
-	        	'id' =>'30',
+	        	'id' => 'relative-vulnerability',
 	            'title' => 'RELATIVE VULNERABILITY',
 	            'logo' => '/relative_vulnerability.png',
 	            'description' => 'Vulnerability to shocks compared to neighbours',
@@ -315,7 +315,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Relative_Vulnerability.xlsx',
         	],
         	[
-	        	'id' =>'31',
+	        	'id' => 'slash-and-burn',
 	            'title' => 'SLASH AND BURN',
 	            'logo' => '/slash_and_burn.png',
 	            'description' => 'Clearing land, change of use, fallow practices',
@@ -325,7 +325,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-SlashnBurn.xlsx',
         	],
         	[
-	        	'id' =>'32',
+	        	'id' => 'uptake-of-interventions',
 	            'title' => 'UPTAKE OF INTERVENTIONS',
 	            'logo' => '/uptake_of_interventions.png',
 	            'description' => 'New practices trialled and evaluated',
@@ -335,7 +335,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Uptake_of_interventions.xlsx',
         	],
         	[
-	        	'id' =>'33',
+	        	'id' => 'value-orientations',
 	            'title' => 'VALUE ORIENTATIONS',
 	            'logo' => '/value_orientations.png',
 	            'description' => 'Value orientations: selfbenefit, community-benefit, innovative, conservative',
@@ -345,7 +345,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Value_orientations.xlsx',
         	],
         	[
-	        	'id' =>'34',
+	        	'id' => 'wash',
 	            'title' => 'WASH',
 	            'logo' => '/wash.png',
 	            'description' => 'Water source, access, storage, hand cleaning, sanitation',
@@ -355,7 +355,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-WASH.xlsx',
         	],
         	[
-	        	'id' =>'35',
+	        	'id' => 'forest-products',
 	            'title' => 'FOREST PRODUCTS',
 	            'logo' => '/forest_products.png',
 	            'description' => 'Harvesting, processing, and use of Non-Timber Forest Products and Woody Forest Products',
@@ -365,7 +365,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Forest_products.xlsx',
         	],
         	[
-	        	'id' =>'36',
+	        	'id' => 'voice-choice-control',
 	            'title' => 'VOICE CHOICE CONTROL',
 	            'logo' => '/voice_choice_control.png',
 	            'description' => 'Gendered experiences of power and communication outside the home',
@@ -375,7 +375,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Voice_choice_control.xlsx',
         	],
         	[
-	        	'id' =>'37',
+	        	'id' => 'forest-governance',
 	            'title' => 'FOREST GOVERNANCE',
 	            'logo' => '/forest_governance.png',
 	            'description' => 'Community forest governance structures',
@@ -385,7 +385,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Forest_governance.xlsx',
         	],
         	[
-	        	'id' =>'38',
+	        	'id' => 'plot-level-land-use-and-boundaries',
 	            'title' => 'PLOT-LEVEL LAND USE AND BOUNDARIES',
 	            'logo' => '/plot_level_land_use_and_boundaries.png',
 	            'description' => 'GPS boundaries of plots, plot level land use and history',
@@ -395,7 +395,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Plot_level_land_use_boundaries.xlsx',
         	],
         	[
-	        	'id' =>'39',
+	        	'id' => 'gender-attitudes',
 	            'title' => 'GENDER ATTITUDES',
 	            'logo' => '/gender_attitudes.png',
 	            'description' => 'Mobility, decision making, violence, care for others',
@@ -405,7 +405,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Gender_attitudes.xlsx',
         	],
         	[
-	        	'id' =>'40',
+	        	'id' => 'gendered-labour-and-time-allocation',
 	            'title' => 'GENDERED LABOUR AND TIME ALLOCATION',
 	            'logo' => '/gendered_labour_and_time_allocation.png',
 	            'description' => '24 hour time allocation, work allocation in farm and home',
@@ -415,7 +415,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Gender_labour_time.xlsx',
         	],
         	[
-	        	'id' =>'41',
+	        	'id' => 'crop-pests',
 	            'title' => 'CROP PESTS',
 	            'logo' => '/crop_pests.png',
 	            'description' => 'Pictoral estimation of crop pests occurance and damage (focus on fall army worm)',
@@ -425,7 +425,7 @@ class ModulesSeeder extends Seeder
 	            'file' => 'Module-Crop_pests.xlsx',
         	],
         	[
-	        	'id' =>'42',
+	        	'id' => 'seed-varieties',
 	            'title' => 'SEED VARIETIES',
 	            'logo' => '/seed_varieties.png',
 	            'description' => 'Uptake and use of improved crop seed varieties',

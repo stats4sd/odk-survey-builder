@@ -14,9 +14,9 @@ class LinkModulesSdgs extends Migration
     public function up()
     {
         Schema::create('_link_modules_sdgs', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->integer('module_id');
-            $table->integer('sdg_id');
+            $table->id('id');
+            $table->string('module_id');
+            $table->unsignedBigInteger('sdg_id');
             $table->timestamps();
         });
     }
