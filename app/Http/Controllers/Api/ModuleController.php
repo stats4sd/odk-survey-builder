@@ -15,7 +15,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $module = Module::with(['sdgs', 'languages'])->get();
+        $module = Module::with(['sdgs', 'languages'])
+        ->where('core', '=', false)
+        ->get();
 
         return $module->toJson();
     }
@@ -38,7 +40,7 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-      
+
     }
 
     /**
@@ -50,7 +52,7 @@ class ModuleController extends Controller
     public function show(Module $module)
     {
         #$module = Module::with(['sdgs'])->get();
-        
+
         #return $module->json();
     }
 
