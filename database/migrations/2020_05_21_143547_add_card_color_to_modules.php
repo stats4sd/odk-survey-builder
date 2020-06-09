@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSdgsTable extends Migration
+class AddCardColorToModules extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSdgsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sdgs', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('label');
-            $table->string('logo');
-            $table->timestamps();
+        Schema::table('modules', function (Blueprint $table) {
+            $table->string('card_color')->default('white');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateSdgsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sdgs');
+        Schema::table('modules', function (Blueprint $table) {
+            //
+        });
     }
 }

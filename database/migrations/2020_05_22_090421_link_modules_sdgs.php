@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSdgsTable extends Migration
+class LinkModulesSdgs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSdgsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sdgs', function (Blueprint $table) {
+        Schema::create('_link_modules_sdgs', function (Blueprint $table) {
             $table->id('id');
-            $table->string('label');
-            $table->string('logo');
+            $table->string('module_id');
+            $table->unsignedBigInteger('sdg_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateSdgsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sdgs');
+        //
     }
 }
