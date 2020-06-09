@@ -15,11 +15,11 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $module = Module::with(['sdgs', 'languages'])
+        $modules = Module::with(['sdgs', 'languages'])
         ->where('core', '=', false)
         ->get();
 
-        return $module->toJson();
+        return $modules->toJson();
     }
 
     /**

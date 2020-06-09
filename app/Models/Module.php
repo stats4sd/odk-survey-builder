@@ -6,7 +6,7 @@ use App\Traits\HasImageUploads;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sdg;
-use App\Models\language;
+use App\Models\Language;
 
 class Module extends Model
 {
@@ -43,7 +43,7 @@ class Module extends Model
 
     public function languages()
     {
-        return $this->belongsToMany(language::class, '_link_modules_languages');
+        return $this->belongsToMany(Language::class, '_link_modules_languages');
     }
 
     /*
