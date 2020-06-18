@@ -15,4 +15,5 @@ Route::group([
     Route::crud('module', 'ModuleCrudController');
     Route::crud('language', 'LanguageCrudController');
     Route::crud('sdg', 'SdgCrudController');
+    Route::crud('form', 'FormCrudController');
 }); // this should be the absolute last line of this file

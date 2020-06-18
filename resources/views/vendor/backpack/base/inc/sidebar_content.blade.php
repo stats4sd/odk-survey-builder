@@ -4,3 +4,4 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('module') }}'><i class='nav-icon fa fa-question'></i> Modules</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('language') }}'><i class='nav-icon fa fa-question'></i> Languages</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('sdg') }}'><i class='nav-icon fa fa-question'></i> Sdgs</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('form') }}'><i class='nav-icon fa fa-question'></i> Forms</a></li>

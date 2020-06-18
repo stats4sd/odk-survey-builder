@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('themes', 'Api\\ThemeController');
 
 Route::apiResource('modules', 'Api\\ModuleController');
+
+Route::apiResource('forms', 'Api\\FormController');

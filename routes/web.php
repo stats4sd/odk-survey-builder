@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('survey-builder-selected', 'FormController@download');
+
+Route::get('home', 'HomeController@index');
+
+Auth::routes();
