@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Form extends Model
 {
@@ -34,6 +35,10 @@ class Form extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -52,4 +57,13 @@ class Form extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function getFullCoreAttribute($value)
+    {
+        if($value){
+            return  True ;
+        }else {
+            return False;
+        }
+    
+    }
 }
