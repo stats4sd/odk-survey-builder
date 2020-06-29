@@ -5,6 +5,8 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Models\Module;
+use App\Models\Theme;
 
 class Form extends Model
 {
@@ -38,6 +40,16 @@ class Form extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, '_link_form_module');
+    }
+
+    public function themes()
+    {
+        return $this->belongsToMany(Theme::class, '_link_form_theme');
     }
 
     /*

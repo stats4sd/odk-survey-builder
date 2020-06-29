@@ -33,6 +33,10 @@ class Theme extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function forms()
+    {
+        return $this->belongsToMany(Forms::class, '_link_form_module');
+    }
 
     /*
     |--------------------------------------------------------------------------

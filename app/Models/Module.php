@@ -46,6 +46,12 @@ class Module extends Model
         return $this->belongsToMany(Language::class, '_link_modules_languages');
     }
 
+    public function forms()
+    {
+        return $this->belongsToMany(Forms::class, '_link_form_module');
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

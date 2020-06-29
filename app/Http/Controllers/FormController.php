@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Form;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -23,7 +24,9 @@ class FormController extends Controller
         $user = Auth::user();
 
         $forms = $user->forms;
-       
+
+        // $form = Form::find(1)->themes()->get();
+   
         return view('account')->with('forms', $forms);
     }
 
@@ -32,9 +35,9 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -43,9 +46,16 @@ class FormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, String $file)
     {
-
+        $form = new Form;
+        $form->user_id = Auth::id();
+        $form->form_title = $request->formTitle;
+        $form->form_id = $request->formId;
+        $form->default_language = $request->defaultLanguage;
+        $form->full_core = $request->selectedCore;
+        $form->file = $file;
+        $form->save();
     }
 
     /**
@@ -130,6 +140,8 @@ class FormController extends Controller
 
             $process->getOutput();
         }
+
+        $this->store($request, $file_name);
 
         $path_download = Storage::url('/odk_forms/'.$file_name);
 

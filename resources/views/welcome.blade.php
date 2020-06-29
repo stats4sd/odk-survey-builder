@@ -1,4 +1,4 @@
-@extends('layouts.nohead')
+@extends('layouts.app')
 
 @section('content')
     <div class="accordion-area">

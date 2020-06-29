@@ -12,15 +12,23 @@
 */
 
 Route::get('/', function () {
+    return redirect('home');
+});
+
+Route::get('home', 'HomeController@index');
+
+Route::get('home', 'FormController@index');
+
+Route::get('/odk-builder', function () {
+    return view('welcome');
+});
+
+Route::get('/odk-builder/{id}/edit', function () {
     return view('welcome');
 });
 
 Route::post('survey-builder-selected', 'FormController@download');
 
-Route::get('home', 'HomeController@index');
-
-
-Route::get('account', 'FormController@index');
 
 
 Auth::routes();

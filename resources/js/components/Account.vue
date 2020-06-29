@@ -11,7 +11,7 @@
             <button @click="row.toggleDetails" style="background: #f46036; width: 150px;">
               {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
             </button>
-            <button @click="" class="mx-2" style="background: #f46036; width: 150px;">
+            <button @click="edit(row.item.id)" class="mx-2" style="background: #f46036; width: 150px;">
                 Edit
             </button>
     </div>
@@ -39,11 +39,13 @@
             <b-col>{{ row.item.isActive }}</b-col>
           </b-row>
 
-         
         </b-card>
       </template>
         </b-table>
     </div>
+    <button @click="openOdkBuilder" class="btn-secondary float-right" style=" width: 150px;">
+                Create a New Form
+            </button>
 </div>
 
                 
@@ -58,13 +60,15 @@
             }
         },
         props: ['forms'],
-        watch: {
-            forms() {
-       
-                
-                console.log(this.forms.full_core);
-            }
-        },
+        methods: {
+          openOdkBuilder: function() {
+            location.href='/odk-builder';
+          },
 
+          edit: function (id) {
+            location.href= '/odk-builder/' + id + '/edit';
+          }
+        }
+        
     }
 </script>
