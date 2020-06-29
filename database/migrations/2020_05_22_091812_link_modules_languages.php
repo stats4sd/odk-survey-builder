@@ -14,7 +14,7 @@ class LinkModulesLanguages extends Migration
     public function up()
     {
         Schema::create('_link_modules_languages', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->string('module_id');
             $table->string('language_id');
             $table->timestamps();
