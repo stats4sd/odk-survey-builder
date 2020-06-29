@@ -22,8 +22,10 @@ class FormController extends Controller
     public function index()
     {
         $user = Auth::user();
-
-        $forms = $user->forms;
+        $forms = [];
+        if (!$user->forms->isEmpty()){
+            $forms = $user->forms;
+        }
 
         // $form = Form::find(1)->themes()->get();
    
