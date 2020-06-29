@@ -3,7 +3,7 @@
 /public/packages
 /public/js
 /public/css
-/storage/*.key
+# /storage/*.key
 /vendor
 .env
 .env.backup
