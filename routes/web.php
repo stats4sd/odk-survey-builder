@@ -15,18 +15,19 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+Auth::routes();
+
 Route::get('home', 'FormController@index');
+
 
 Route::get('/odk-builder', function () {
     return view('welcome');
 });
 
-Route::get('/odk-builder/{id}/edit', function () {
-    return view('welcome');
-});
+// Route::get('odk-builder/{id}', function () {
+//     return view('edit');
+// });
 
 Route::post('survey-builder-selected', 'FormController@download');
 
-
-
-Auth::routes();
+Route::get('odk-builder/{id}', 'FormController@show');

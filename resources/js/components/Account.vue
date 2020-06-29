@@ -31,12 +31,12 @@
         <b-card>
           <b-row class="mb-2">
             <b-col sm="3" class="text-sm-right"><b>Themes:</b></b-col>
-            <b-col>{{ row.item.form_id }}</b-col>
+            <b-col>{{  }}</b-col>
           </b-row>
 
           <b-row class="mb-2">
             <b-col sm="3" class="text-sm-right"><b>Modules:</b></b-col>
-            <b-col>{{ row.item.isActive }}</b-col>
+            <b-col>{{ row.item.id }}</b-col>
           </b-row>
 
         </b-card>

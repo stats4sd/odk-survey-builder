@@ -23,7 +23,7 @@ class FormController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +35,22 @@ class FormController extends Controller
 
         $forms = $user->forms;
 
-
-        // $form = Form::find(1)->themes()->get();
+        $modules = "";
+        $themes = "";
    
+        foreach ($forms as $value) {
+            $form_modules = Form::find($value->id)->modules()->get();
+            $form_themes = Form::find($value->id)->themes()->get();
+            foreach ($form_modules as $value) {
+                $modules = $modules . $value->title . ', ';
+            }
+        
+            foreach ($form_themes as $value) {
+                $themes = $themes . $value->title . ', ';
+            }
+            
+        }
+
         return view('account')->with('forms', $forms);
     }
 
@@ -67,6 +80,10 @@ class FormController extends Controller
         $form->full_core = $request->selectedCore;
         $form->file = $file;
         $form->save();
+
+        $form->modules()->sync($request->selectedModules);
+        $form->themes()->sync($request->selectedThemes);
+
     }
 
     /**
@@ -75,9 +92,11 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function show(Form $form)
-    {
+    public function show($id)
+    {   
+        $form = Form::find($id)->get();
 
+        return view('edit')->with('form', $form);
     }
 
     /**
@@ -88,7 +107,7 @@ class FormController extends Controller
      */
     public function edit(Form $form)
     {
-        //
+        
     }
 
     /**
@@ -139,18 +158,18 @@ class FormController extends Controller
        	$date = str_replace('+', '', $date);
         $file_name = $date.$form_title.".xlsx";
 
-        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+        // $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
-        $process->run();
+        // $process->run();
 
-        if(!$process->isSuccessful()) {
+        // if(!$process->isSuccessful()) {
 
-           throw new ProcessFailedException($process);
+        //    throw new ProcessFailedException($process);
 
-        } else {
+        // } else {
 
-            $process->getOutput();
-        }
+        //     $process->getOutput();
+        // }
 
         $this->store($request, $file_name);
 

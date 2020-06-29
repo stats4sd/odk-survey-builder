@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sdg;
 use App\Models\Language;
+use App\Models\Form;
 
 class Module extends Model
 {

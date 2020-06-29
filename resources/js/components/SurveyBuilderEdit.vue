@@ -51,7 +51,7 @@
                                         :class="{ 'selected' : selectedThemes.includes(theme.id)}"
                                     >
                                         <img
-                                            :src="'storage/'+theme.logo"
+                                            :src="'/storage/'+theme.logo"
                                         >
                                     </label>
                                 </div>
@@ -112,7 +112,7 @@
                                         :class="{ 'selected' : selectedCore == true}"
                                     >
                                         <img
-                                            :src="'storage/core.webp'"
+                                            :src="'/storage/core.webp'"
                                         >
 
                                     </label>
@@ -131,7 +131,7 @@
                                         :class="{ 'selected' : selectedCore == false}"
                                     >
                                         <img
-                                            :src="'storage/other_modules.jpg'"
+                                            :src="'/storage/other_modules.jpg'"
                                         >
                                     </label>
                                 </div>
@@ -198,15 +198,10 @@
                                             :class="{ 'selected' : selectedModules.includes(mod.id)}"
                                         >
                                             <img
-                                                :src="'storage/'+mod.logo"
+                                                :src="'/storage/'+mod.logo"
                                             >
                                         </label>
-                                       <!--  <h5>Description: {{mod.description}}</h5>
-                                        <h5>Time: {{mod.minutes}} min</h5>
-                                        <h5>Language: {{mod.minutes}} </h5>
-                                        <h5>Sdgs: {{mod.minutes}} </h5> -->
-                                        
-                                    <!-- </div> -->
+                                       
                                 
                                 </div>
                             </div>
@@ -259,7 +254,7 @@
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
                                         <img
-                                            :src="'storage/'+theme.logo"
+                                            :src="'/storage/'+theme.logo"
                                         >
                                     </div>
                                     
@@ -273,14 +268,14 @@
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'storage/core.webp'"
+                                        :src="'/storage/core.webp'"
                                     >
                                 </div>
                                 <div v-if="selectedCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'storage/other_modules.jpg'"
+                                        :src="'/storage/other_modules.jpg'"
                                     >
                                 </div>
                             </div>
@@ -295,7 +290,7 @@
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
                                         <img
-                                            :src="'storage/'+mod.logo"
+                                            :src="'/storage/'+mod.logo"
                                         >
                                        
                              
@@ -339,11 +334,13 @@
 <script>
 
 const rootUrl = process.env.MIX_APP_URL
-
+console.log(rootUrl+'/api/themes');
+var id = window.location.hash;
+console.log(id);
     export default {
         data () {
             return {
-                currentStep: 1,
+                currentStep: 4,
                 steps: [
                     {
                         'id': 1,
@@ -372,17 +369,22 @@ const rootUrl = process.env.MIX_APP_URL
                 defaultLanguage: '',
             }
         },
+       props: ['form'],
 
         mounted () {
 
-            axios.get('api/themes').then((response) => {
+            axios.get(rootUrl+'/api/themes').then((response) => {
                 this.themes = response.data;
 
             }),
 
-            axios.get('api/modules').then((response) => {
+            axios.get(rootUrl+'/api/modules').then((response) => {
                 this.modules = response.data;
-                console.log(this.modules);
+            }),
+
+            axios.get(rootUrl+'/odk-builder/').then((response) => {
+                this.modules = response.data;
+                console.log('hello');
             })
         },
         watch: {
