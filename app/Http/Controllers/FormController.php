@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\Auth;
 class FormController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,10 +32,9 @@ class FormController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $forms = [];
-        if (!$user->forms->isEmpty()){
-            $forms = $user->forms;
-        }
+
+        $forms = $user->forms;
+
 
         // $form = Form::find(1)->themes()->get();
    
