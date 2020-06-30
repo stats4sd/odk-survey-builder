@@ -24,10 +24,8 @@ Route::get('/odk-builder', function () {
     return view('welcome');
 });
 
-// Route::get('odk-builder/{id}', function () {
-//     return view('edit');
-// });
-
 Route::post('survey-builder-selected', 'FormController@download');
 
-Route::get('odk-builder/{id}', 'FormController@show');
+Route::get('odk-builder/{id}/edit', 'FormController@edit');
+
+Route::post('edit-form/{id}', 'FormController@generateNewFile');

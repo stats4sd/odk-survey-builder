@@ -25,6 +25,7 @@ class Form extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $with = ['themes', 'modules'];
 
     /*
     |--------------------------------------------------------------------------

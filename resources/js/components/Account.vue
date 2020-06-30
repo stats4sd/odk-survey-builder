@@ -1,8 +1,7 @@
 <template>
    
     <div>
-    <!-- <div class="panel-link active collapsed" style="background-color: #12756b; color: white; min-height:70px; border-radius:13px; text-align: left; position: relative; padding: 17px 65px 17px 20px; font-size: 15px; font-weight: 500;">Created Forms</div> -->
-
+   
     <div class="mt-3">
         <b-table sticky-header :items="forms" :fields="fields" head-variant="dark">
         <template v-slot:cell(actions)="row">
@@ -31,12 +30,13 @@
         <b-card>
           <b-row class="mb-2">
             <b-col sm="3" class="text-sm-right"><b>Themes:</b></b-col>
-            <b-col>{{  }}</b-col>
+
+            <b-col><span v-for="theme in row.item.themes">{{ theme.title }}, </span></b-col>
           </b-row>
 
           <b-row class="mb-2">
             <b-col sm="3" class="text-sm-right"><b>Modules:</b></b-col>
-            <b-col>{{ row.item.id }}</b-col>
+            <b-col><span v-for="module in row.item.modules">{{ module.title }}, </span></b-col>
           </b-row>
 
         </b-card>

@@ -35,22 +35,6 @@ class FormController extends Controller
 
         $forms = $user->forms;
 
-        $modules = "";
-        $themes = "";
-   
-        foreach ($forms as $value) {
-            $form_modules = Form::find($value->id)->modules()->get();
-            $form_themes = Form::find($value->id)->themes()->get();
-            foreach ($form_modules as $value) {
-                $modules = $modules . $value->title . ', ';
-            }
-        
-            foreach ($form_themes as $value) {
-                $themes = $themes . $value->title . ', ';
-            }
-            
-        }
-
         return view('account')->with('forms', $forms);
     }
 
@@ -94,9 +78,7 @@ class FormController extends Controller
      */
     public function show($id)
     {   
-        $form = Form::find($id)->get();
-
-        return view('edit')->with('form', $form);
+     
     }
 
     /**
@@ -105,9 +87,12 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function edit(Form $form)
+    public function edit($id)
     {
-        
+        $form = Form::with(['modules', 'themes'])->get();
+        $form = $form->find($id);
+
+        return view('edit')->with('form', $form);
     }
 
     /**
@@ -117,9 +102,17 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Form $form)
+    public function update(Request $request, $file_name, $id)
     {
-        //
+        Form::where('id', $id)->update([
+            'user_id'=> Auth::id(),
+            'form_title'=> $request->formTitle,
+            'form_id'=> $request->formId,
+            'default_language'=> $request->defaultLanguage,
+            'full_core'=> $request->selectedCore,
+            'file' => $file_name
+        ]);
+
     }
 
     /**
@@ -158,20 +151,65 @@ class FormController extends Controller
        	$date = str_replace('+', '', $date);
         $file_name = $date.$form_title.".xlsx";
 
-        // $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
-        // $process->run();
+        $process->run();
 
-        // if(!$process->isSuccessful()) {
+        if(!$process->isSuccessful()) {
 
-        //    throw new ProcessFailedException($process);
+           throw new ProcessFailedException($process);
 
-        // } else {
+        } else {
 
-        //     $process->getOutput();
-        // }
+            $process->getOutput();
+        }
 
         $this->store($request, $file_name);
+
+        $path_download = Storage::url('/odk_forms/'.$file_name);
+
+        return response()->json(['path' => $path_download]);
+    }
+
+    public function generateNewFile(Request $request, $id)
+    {
+        $modules = $request->selectedModules;
+        $core = $request->selectedCore;
+        $form_title = $request->formTitle;
+        $form_id = $request->formId;
+        $default_language = $request->defaultLanguage;
+        $modules_list = "'";
+
+        foreach ($modules as $mod_id) {
+            $module = Module::where('id',$mod_id)->first();
+            $file_name = $module->file;
+            $modules_list .= $file_name.',';
+        }
+        $modules_list = substr($modules_list, 0, -1);
+        $modules_list .= "'";
+
+        $scriptName = 'merge_odk_form.py';
+        $scriptPath = base_path() . '/scripts/' . $scriptName;
+        $base_path = base_path();
+        $date = str_replace(':', '', date('c'));
+        $date = str_replace('-', '', $date);
+        $date = str_replace('+', '', $date);
+        $file_name = $date.$form_title.".xlsx";
+
+        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+
+        $process->run();
+
+        if(!$process->isSuccessful()) {
+
+           throw new ProcessFailedException($process);
+
+        } else {
+
+            $process->getOutput();
+        }
+
+        $this->update($request, $file_name, $id);
 
         $path_download = Storage::url('/odk_forms/'.$file_name);
 

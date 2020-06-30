@@ -51,7 +51,7 @@
                                         :class="{ 'selected' : selectedThemes.includes(theme.id)}"
                                     >
                                         <img
-                                            :src="'storage/'+theme.logo"
+                                            :src="'/storage/'+theme.logo"
                                         >
                                     </label>
                                 </div>
@@ -112,7 +112,7 @@
                                         :class="{ 'selected' : selectedCore == true}"
                                     >
                                         <img
-                                            :src="'storage/core.webp'"
+                                            :src="'/storage/core.webp'"
                                         >
 
                                     </label>
@@ -131,7 +131,7 @@
                                         :class="{ 'selected' : selectedCore == false}"
                                     >
                                         <img
-                                            :src="'storage/other_modules.jpg'"
+                                            :src="'/storage/other_modules.jpg'"
                                         >
                                     </label>
                                 </div>
@@ -190,23 +190,17 @@
                                         :value="mod.id"
                                         class="d-none"
                                     >
-                                    <!-- <div class="card"> -->
-                                        
+                                  
                                         <label
                                             class="checkdiv"
                                             :for="`${mod.id}_check`"
                                             :class="{ 'selected' : selectedModules.includes(mod.id)}"
                                         >
                                             <img
-                                                :src="'storage/'+mod.logo"
+                                                :src="'/storage/'+mod.logo"
                                             >
                                         </label>
-                                       <!--  <h5>Description: {{mod.description}}</h5>
-                                        <h5>Time: {{mod.minutes}} min</h5>
-                                        <h5>Language: {{mod.minutes}} </h5>
-                                        <h5>Sdgs: {{mod.minutes}} </h5> -->
-                                        
-                                    <!-- </div> -->
+                                       
                                 
                                 </div>
                             </div>
@@ -259,7 +253,7 @@
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
                                         <img
-                                            :src="'storage/'+theme.logo"
+                                            :src="'/storage/'+theme.logo"
                                         >
                                     </div>
                                     
@@ -273,14 +267,14 @@
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'storage/core.webp'"
+                                        :src="'/storage/core.webp'"
                                     >
                                 </div>
                                 <div v-if="selectedCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'storage/other_modules.jpg'"
+                                        :src="'/storage/other_modules.jpg'"
                                     >
                                 </div>
                             </div>
@@ -295,7 +289,7 @@
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
                                         <img
-                                            :src="'storage/'+mod.logo"
+                                            :src="'/storage/'+mod.logo"
                                         >
                                        
                              
@@ -323,7 +317,7 @@
 
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="" href=""
-                                    aria-expanded="false" aria-controls="" v-on:click='submit'>
+                                    aria-expanded="false" aria-controls="" v-on:click='submit(); update(); '>
                                     Finish
                                 </button>
                             </div>
@@ -343,7 +337,7 @@ const rootUrl = process.env.MIX_APP_URL
     export default {
         data () {
             return {
-                currentStep: 1,
+                currentStep: this.form ? 4 : 1,
                 steps: [
                     {
                         'id': 1,
@@ -363,33 +357,55 @@ const rootUrl = process.env.MIX_APP_URL
                     },
                 ],
                 themes: [],
+                modules: [],
                 modulesFilter: [],
                 selectedThemes: [],
-                selectedCore: true,
+                selectedCore: this.form ? this.form.full_core : true,
                 selectedModules:[],
-                formTitle: '',
-                formId: '',
-                defaultLanguage: '',
+                formTitle: this.form ? this.form.form_title : '',
+                formId: this.form ? this.form.form_id : [],
+                defaultLanguage: this.form ? this.form.default_language : [],
+
             }
         },
+       props: ['form'],
 
         mounted () {
 
-            axios.get('api/themes').then((response) => {
+            axios.get(rootUrl+'/api/themes').then((response) => {
                 this.themes = response.data;
 
-            }),
-
-            axios.get('api/modules').then((response) => {
-                this.modules = response.data;
-                console.log(this.modules);
             })
+
+            axios.get(rootUrl+'/api/modules').then((response) => {
+                this.modules = response.data;
+            })
+
+            if(this.currentStep == 4){
+                    $('#collapseOne').collapse('hide');
+                    $('#collapseFour').collapse('show');
+                }
+
+            if(this.form!=null){ 
+                this.selectedThemes = this.form.themes.map((theme, index)=> {
+                    return theme.id;
+                });
+
+                this.selectedModules = this.form.modules.map((module, index)=> {
+                    return module.id;
+                });
+
+                this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
+
+            }
+            
         },
         watch: {
+          
             selectedThemes() {
        
                 this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
-                console.log(this.modulesFilter);
+
             }
         },
 
@@ -406,24 +422,48 @@ const rootUrl = process.env.MIX_APP_URL
                     $('#collapseThree').collapse('hide');
                 }
             },
+         
             submit: function(event){
-                axios({
-                    method: 'post',
-                    url: rootUrl+"/survey-builder-selected",
-                    data: {
-                        selectedThemes: this.selectedThemes,
-                        selectedCore: this.selectedCore,
-                        selectedModules: this.selectedModules,
-                        formTitle: this.formTitle,
-                        formId: this.formId,
-                        defaultLanguage: this.defaultLanguage,
-                    }
-                })
-                .then((result) => {
-                   window.location.href = result.data['path'];
-                }, (error) => {
-                    console.log(error);
-                });                   
+                if(this.form == null){
+                    axios({
+                        method: 'post',
+                        url: rootUrl+"/survey-builder-selected",
+                        data: {
+                            selectedThemes: this.selectedThemes,
+                            selectedCore: this.selectedCore,
+                            selectedModules: this.selectedModules,
+                            formTitle: this.formTitle,
+                            formId: this.formId,
+                            defaultLanguage: this.defaultLanguage,
+                        }
+                    })
+                    .then((result) => {
+                       window.location.href = result.data['path'];
+                    }, (error) => {
+                        console.log(error);
+                    });
+                }                   
+            }, 
+            update: function(event){
+                if(this.form != null){
+                    axios({
+                        method: 'post',
+                        url: rootUrl + "/edit-form/" + this.form.id,
+                        data: {
+                            selectedThemes: this.selectedThemes,
+                            selectedCore: this.selectedCore,
+                            selectedModules: this.selectedModules,
+                            formTitle: this.formTitle,
+                            formId: this.formId,
+                            defaultLanguage: this.defaultLanguage,
+                        }
+                    })
+                    .then((result) => {
+                       window.location.href = result.data['path'];
+                    }, (error) => {
+                        console.log(error);
+                    });  
+                }                 
 
             }
         }
