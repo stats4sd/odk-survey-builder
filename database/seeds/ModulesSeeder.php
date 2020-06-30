@@ -17,7 +17,7 @@ class ModulesSeeder extends Seeder
 	        	'id' => 'metadata',
 	            'title' => 'Metadata',
 	            'logo' => '/metadata.png',
-	            'description' => `Enumerator data, time and date, location, GPS, consent, enumerator notes`,
+	            'description' => "Enumerator data, time and date, location, GPS, consent, enumerator notes",
 	            'theme_id' => '0',
 	            'minutes' => '4',
 	            'core' => '1',
