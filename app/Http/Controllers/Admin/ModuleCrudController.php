@@ -40,14 +40,14 @@ class ModuleCrudController extends CrudController
                 'label' => 'Title',
                 'type' => 'text',
             ],
-            [
-                'name' => 'theme_id',
-                'label' => 'Theme',
-                'type' => 'select',
-                'entity' => 'theme',
-                'attribute' => 'title',
-                'model' => Theme::class
-            ],
+            // [
+            //     'name' => 'theme_id',
+            //     'label' => 'Theme',
+            //     'type' => 'select',
+            //     'entity' => 'theme',
+            //     'attribute' => 'title',
+            //     'model' => Theme::class
+            // ],
             [
                 'name' => 'description',
                 'label' => 'Description',
