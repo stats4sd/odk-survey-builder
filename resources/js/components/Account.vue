@@ -3,7 +3,7 @@
     <div>
    
     <div class="mt-3">
-        <b-table sticky-header :items="forms" :fields="fields" head-variant="dark">
+        <b-table sticky-header="600px" :items="forms" :fields="fields" head-variant="dark">
         <template v-slot:cell(actions)="row">
 
         <div style=" display: flex;">
