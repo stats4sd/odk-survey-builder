@@ -124,13 +124,13 @@ class ModuleCrudController extends CrudController
     {
         $this->setupCreateOperation();
 
-        $this->updateField('id', [
-            'name' => 'id',
-            'label' => 'Unique ID',
-            'type' => 'text',
-            'attributes' => [
-                'readonly' => true,
-            ],
-        ]);
+        // $this->updateField('id', [
+        //     'name' => 'id',
+        //     'label' => 'Unique ID',
+        //     'type' => 'text',
+        //     'attributes' => [
+        //         'readonly' => true,
+        //     ]
+        // ]);
     }
 }
