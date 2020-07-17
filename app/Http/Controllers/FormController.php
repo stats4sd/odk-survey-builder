@@ -151,7 +151,7 @@ class FormController extends Controller
        	$date = str_replace('+', '', $date);
         $file_name = $date.$form_title.".xlsx";
 
-        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+        $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
         $process->run();
 
