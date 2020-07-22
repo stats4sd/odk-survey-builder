@@ -112,7 +112,8 @@
                                         :class="{ 'selected' : selectedCore == true}"
                                     >
                                         <img
-                                            :src="'/storage/core.webp'"
+                                            :src="'/img/full_core.webp'"
+                                            v-b-tooltip.hover title="Full Core">
                                         >
 
                                     </label>
@@ -131,10 +132,12 @@
                                         :class="{ 'selected' : selectedCore == false}"
                                     >
                                         <img
-                                            :src="'/storage/other_modules.jpg'"
+                                            :src="'/img/reduced_core.png'"
+                                            v-b-tooltip.hover title="Reduced Core"
                                         >
                                     </label>
                                 </div>
+                                       
                               
                             </div>
                             <div style="text-align: center;">
@@ -267,14 +270,14 @@
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'/storage/core.webp'"
+                                        :src="'/img/full_core.webp'"
                                     >
                                 </div>
                                 <div v-if="selectedCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
-                                        :src="'/storage/other_modules.jpg'"
+                                        :src="'/img/reduced_core.png'"
                                     >
                                 </div>
                             </div>
