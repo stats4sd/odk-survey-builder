@@ -1,7 +1,7 @@
 <template>
    
     <div>
-   
+    <b-alert v-if="message" variant="success" show> {{message}} </b-alert>
     <div class="mt-3">
         <b-table sticky-header="600px" :items="forms" :fields="fields" head-variant="dark">
         <template v-slot:cell(actions)="row">
@@ -13,6 +13,9 @@
             <button @click="edit(row.item.id)" class="mx-2" style="background: #f46036; width: 150px;">
                 Edit
             </button>
+            <button @click="remove(row.item.id)" class="mx-2" style="background: #f46036; width: 150px;">
+                Delete
+            </button>
     </div>
 
       </template>
@@ -23,6 +26,11 @@
     
         >
         </b-form-checkbox>
+
+      </template>
+
+      <template v-slot:cell(file)="row">
+        <a :href="'/storage/odk_forms/' + row.item.file">{{row.item.file}}</a>
 
       </template>
 
@@ -45,11 +53,9 @@
     </div>
     <button @click="openOdkBuilder" class="btn-secondary float-right" style=" width: 150px;">
                 Create a New Form
-            </button>
+    </button>
 </div>
-
-                
-        
+    
 </template>
 
 <script>
@@ -57,6 +63,7 @@
         data() {
             return {
                 fields: ['form_title', 'form_id', 'default_language', 'full_core', 'file', 'created_at', 'actions'],
+                message:'',
             }
         },
         props: ['forms'],
@@ -67,8 +74,16 @@
 
           edit: function (id) {
             location.href= '/odk-builder/' + id + '/edit';
+          },
+
+          remove: function (id) {
+            axios.post('/account/' + id + '/delete', {
+              }).then((result) => {
+
+                this.message = result.data.message;
+                location.href= '/home';
+              })
+            }
           }
-        }
-        
     }
 </script>

@@ -318,6 +318,7 @@
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="" href=""
                                     aria-expanded="false" aria-controls="" v-on:click='submit(); update(); '>
+                                    <b-spinner small v-if="busy" label="Spinning"></b-spinner>
                                     Finish
                                 </button>
                             </div>
@@ -365,6 +366,7 @@ const rootUrl = process.env.MIX_APP_URL
                 formTitle: this.form ? this.form.form_title : '',
                 formId: this.form ? this.form.form_id : [],
                 defaultLanguage: this.form ? this.form.default_language : [],
+                busy: false,
 
             }
         },
@@ -424,6 +426,7 @@ const rootUrl = process.env.MIX_APP_URL
             },
          
             submit: function(event){
+                this.busy = true;
                 if(this.form == null){
                     axios({
                         method: 'post',
@@ -439,12 +442,15 @@ const rootUrl = process.env.MIX_APP_URL
                     })
                     .then((result) => {
                        window.location.href = result.data['path'];
+                       this.busy = false;
                     }, (error) => {
+                        this.busy = false;
                         console.log(error);
                     });
                 }                   
             }, 
             update: function(event){
+                this.busy = true;
                 if(this.form != null){
                     axios({
                         method: 'post',
@@ -460,7 +466,9 @@ const rootUrl = process.env.MIX_APP_URL
                     })
                     .then((result) => {
                        window.location.href = result.data['path'];
+                       this.busy = false;
                     }, (error) => {
+                        this.busy = false;
                         console.log(error);
                     });  
                 }                 

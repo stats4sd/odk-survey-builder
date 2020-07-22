@@ -28,4 +28,6 @@ Route::post('survey-builder-selected', 'FormController@download');
 
 Route::get('odk-builder/{id}/edit', 'FormController@edit');
 
+Route::post('account/{id}/delete', 'FormController@destroy');
+
 Route::post('edit-form/{id}', 'FormController@generateNewFile');

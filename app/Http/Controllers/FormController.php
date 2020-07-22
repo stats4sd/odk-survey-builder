@@ -10,6 +10,7 @@ use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Redirect;
 
 
 class FormController extends Controller
@@ -121,9 +122,12 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Form $form)
+    public function destroy($id)
     {
-        //
+        $form = Form::find($id);
+        $form_title = $form->form_title;
+        Form::destroy($id);
+        return  response()->json(['message' => 'The '.$form_title.' form has been successfully deleted.']);
     }
 
     public function download(Request $request)
