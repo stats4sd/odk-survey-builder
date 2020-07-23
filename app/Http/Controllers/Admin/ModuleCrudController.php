@@ -43,10 +43,10 @@ class ModuleCrudController extends CrudController
             [
                 'name' => 'theme_id',
                 'label' => 'Theme',
-                'type' => 'text',
-                // 'entity' => 'theme',
-                // 'attribute' => 'title',
-                // 'model' => Theme::class
+                'type' => 'select',
+                'entity' => 'theme',
+                'attribute' => 'title',
+                'model' => Theme::class
             ],
             [
                 'name' => 'description',
@@ -91,10 +91,10 @@ class ModuleCrudController extends CrudController
             [
                 'name' => 'theme_id',
                 'label' => 'Theme',
-                'type' => 'text',
-            //     'entity' => 'theme',
-            //     'attribute' => 'title',
-            //     'model' => Theme::class
+                'type' => 'select2',
+                'entity' => 'theme',
+                'attribute' => 'title',
+                'model' => Theme::class
             ],
             [
                 'name' => 'description',
