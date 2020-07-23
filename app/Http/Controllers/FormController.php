@@ -134,8 +134,8 @@ class FormController extends Controller
     {
     	$modules = $request->selectedModules;
         $core = $request->selectedCore;
-        $form_title = $request->formTitle;
-        $form_id = $request->formId;
+        $form_title = "'".$request->formTitle."'";
+        $form_id = "'".$request->formId."'";
         $default_language = $request->defaultLanguage;
     	$modules_list = "'";
 
@@ -153,7 +153,7 @@ class FormController extends Controller
        	$date = str_replace(':', '', date('c'));
        	$date = str_replace('-', '', $date);
        	$date = str_replace('+', '', $date);
-        $file_name = $date.$form_title.".xlsx";
+        $file_name = $date.str_replace(' ', '_', $request->formTitle).".xlsx";
 
         $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
@@ -179,8 +179,8 @@ class FormController extends Controller
     {
         $modules = $request->selectedModules;
         $core = $request->selectedCore;
-        $form_title = $request->formTitle;
-        $form_id = $request->formId;
+        $form_title = "'".$request->formTitle."'";
+        $form_id = "'".$request->formId."'";
         $default_language = $request->defaultLanguage;
         $modules_list = "'";
 
@@ -198,7 +198,7 @@ class FormController extends Controller
         $date = str_replace(':', '', date('c'));
         $date = str_replace('-', '', $date);
         $date = str_replace('+', '', $date);
-        $file_name = $date.$form_title.".xlsx";
+        $file_name =  $date.str_replace(' ', '_', $request->formTitle).".xlsx";
 
         $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
