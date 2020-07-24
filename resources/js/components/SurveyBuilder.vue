@@ -4,31 +4,20 @@
             :current-step="currentStep"
             :steps="steps"
         />
-        <div
-            id="survey-sections"
-            class="container my-4">
-            <div
-                id="toolsform"
-                class="accordion-area"
-            >
+        <div class="container my-4">
+            <div class="accordion-area" role="tablist">
                 <div class="panel">
-                    <div
-                        id="headerOne"
-                        class="panel-header"
-                    >
-                        <button
+                    <div class="panel-header">
+                        <b-button
                             class="panel-link active"
-                            data-toggle="collapse"
-                            data-target="#collapseOne"
+                            :class="visible1 ? null : 'collapsed'"
+                            :aria-expanded="visible1 ? 'true' : 'false'"
+                            @click="currentStep = 1"
                         >
                             Step 1: {{ steps[0].title }}
-                        </button>
+                        </b-button>
                     </div>
-                    <div
-                        id="collapseOne"
-                        class="collapse show"
-                        data-parent="#survey-sections"
-                    >
+                    <b-collapse id="collapse-1" accordion="accordion" role="tabpanel" v-model="visible1">
                         <div class="py-4 mx-4">
                             <h3>What themes are you interested in collecting data about?</h3>
                             <p class="mt-3">Selection options below to begin</p>
@@ -50,55 +39,36 @@
                                         :for="`${theme.id}_check`"
                                         :class="{ 'selected' : selectedThemes.includes(theme.id)}"
                                     >
-                                        <img
-                                            :src="'/storage/'+theme.logo"
-                                        >
+                                        <img :src="'/storage/'+theme.logo">
                                     </label>
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapseTwo"
-                                    aria-expanded="false" aria-controls="collapseTwo"  v-on:click="nextToForm('themes')">
+                                <button class="site-btn my-4" v-on:click="currentStep=2">
                                     Next
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </b-collapse>
                 </div>
-            </div>
-        </div>
-        <div
-            id="survey-core"
-            class="container my-4">
-            <div
-                id="toolsform"
-                class="accordion-area"
-            >
+
                 <div class="panel">
-                    <div
-                        id="headerOne"
-                        class="panel-header"
-                    >
-                        <button
-                            class="panel-link active collapsed"
-                            data-toggle="collapse"
-                            data-target="#collapseTwo"
+                    <div class="panel-header">
+                        <b-button
+                            class="panel-link active"
+                            :class="visible2 ? null : 'collapsed'"
+                            :aria-expanded="visible2 ? 'true' : 'false'"
+                            @click="currentStep = 2"
                         >
                             Step 2: {{ steps[1].title }}
-                        </button>
+                        </b-button>
                     </div>
-                    <div
-                        id="collapseTwo"
-                        class="collapse"
-                        data-parent="#survey-core"
-                    >
+                    <b-collapse id="collapse-2" accordion="accordion" role="tabpanel" v-model="visible2">
                         <div class="py-4 mx-4">
                             <h3>Do you want full Core or Reduced Core Rhomis?</h3>
                             <p class="mt-3">Selection options below to begin</p>
                             <div class="row img-block py-4 mx-4 justify-content-center">
-                                        
                                 <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
-
                                     <input
                                         :id="`full_core_check`"
                                         v-model="selectedCore"
@@ -137,45 +107,30 @@
                                         >
                                     </label>
                                 </div>
-                                       
-                              
+
+
                             </div>
                             <div style="text-align: center;">
-                                <button class="site-btn my-4" data-toggle="collapse" href="#collapseThree"
-                                    aria-expanded="false" aria-controls="collapseThree" v-on:click="nextToForm('core')">
+                                <button class="site-btn my-4" v-on:click="currentStep=3">
                                     Next
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </b-collapse>
                 </div>
-            </div>
-        </div>
-        <div
-            id="survey-modules"
-            class="container my-4">
-            <div
-                id="toolsform"
-                class="accordion-area"
-            >
+
                 <div class="panel">
-                    <div
-                        id="headerOne"
-                        class="panel-header"
-                    >
-                        <button
-                            class="panel-link active collapsed"
-                            data-toggle="collapse"
-                            data-target="#collapseThree"
+                    <div class="panel-header">
+                        <b-button
+                            class="panel-link active"
+                            :class="visible3 ? null : 'collapsed'"
+                            :aria-expanded="visible3 ? 'true' : 'false'"
+                            @click="currentStep = 3"
                         >
                             Step 3: {{ steps[2].title }}
-                        </button>
+                        </b-button>
                     </div>
-                    <div
-                        id="collapseThree"
-                        class="collapse"
-                        data-parent="#survey-modules"
-                    >
+                    <b-collapse id="collapse-3" accordion="accordion" role="tabpanel" v-model="visible3">
                         <div class="py-4 mx-4">
                             <h3>Add optional modules</h3>
                             <p class="mt-3">Selection options below to begin</p>
@@ -185,7 +140,7 @@
                                     :key="mod.id"
                                     class="col-md-4"
                                 >
-                                
+
                                     <input
                                         :id="`${mod.id}_check`"
                                         v-model="selectedModules"
@@ -193,79 +148,56 @@
                                         :value="mod.id"
                                         class="d-none"
                                     >
-                                  
+
                                         <label
                                             class="checkdiv"
                                             :for="`${mod.id}_check`"
                                             :class="{ 'selected' : selectedModules.includes(mod.id)}"
                                         >
-                                            <img
-                                                :src="'/storage/'+mod.logo"
-                                            >
+                                            <img :src="'/storage/'+mod.logo">
                                         </label>
-                                       
-                                
                                 </div>
                             </div>
                             <div style="text-align: center;">
                                 <button class="site-btn my-4" data-toggle="collapse" href="#collapseFour"
-                                    aria-expanded="false" aria-controls="collapseFour" v-on:click="nextToForm('modules')">
+                                    aria-expanded="false" aria-controls="collapseFour" v-on:click="currentStep=4">
                                     Next
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </b-collapse>
                 </div>
-            </div>
-        </div>
-        <div
-            id="survey-review"
-            class="container my-4">
-            <div
-                id="toolsform"
-                class="accordion-area"
-            >
+
                 <div class="panel">
-                    <div
-                        id="headerOne"
-                        class="panel-header"
-                    >
-                        <button
-                            class="panel-link active collapsed"
-                            data-toggle="collapse"
-                            data-target="#collapseFour"
+                    <div class="panel-header">
+                        <b-button
+                            class="panel-link active"
+                            :class="visible4 ? null : 'collapsed'"
+                            :aria-expanded="visible4 ? 'true' : 'false'"
+                            @click="currentStep = 4"
                         >
                             Step 4: {{ steps[3].title }}
-                        </button>
+                        </b-button>
                     </div>
-                    <div
-                        id="collapseFour"
-                        class="collapse"
-                        data-parent="#survey-review"
-                    >
+                    <b-collapse id="collapse-4" accordion="accordion" role="tabpanel" v-model="visible4">
                         <div class="py-4 mx-4">
                             <h3>Preview and finish</h3>
                             <p class="mt-3"></p>
                             <h4>Themes</h4>
                             <div class="row py-4 mx-4 justify-content-center">
-                                <div
-                                    v-for="theme in themes"
-                                    :key="theme.id" 
-                                >
+                                <div v-for="theme in themes" :key="theme.id">
                                     <div v-if="selectedThemes.includes(theme.id)"
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                     >
-                                        <img
-                                            :src="'/storage/'+theme.logo"
-                                        >
+                                        <img :src="'/storage/'+theme.logo">
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
                             <h4>Core</h4>
                             <div class="row py-4 mx-4 justify-content-center">
-                                
+
                                 <div v-if="selectedCore==true"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
@@ -286,7 +218,7 @@
                             <div class="row py-4 mx-4 justify-content-center">
                                 <div
                                     v-for="mod in modules"
-                                    :key="mod.id" 
+                                    :key="mod.id"
                                 >
                                     <div v-if="selectedModules.includes(mod.id)"
                                         class="col-xl-2 col-lg-3 col-md-4 big-img-button"
@@ -294,14 +226,14 @@
                                         <img
                                             :src="'/storage/'+mod.logo"
                                         >
-                                       
-                             
+
+
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                             <h4>Settings</h4>
                             <div class="row py-4 mx-4 justify-content-center">
-                      
+
                                 <div class="col-md-4">
                                     <h5>Form Title</h5>
                                     <input v-model="formTitle" placeholder="Insert the title">
@@ -326,11 +258,10 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </b-collapse>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -375,6 +306,26 @@ const rootUrl = process.env.MIX_APP_URL
         },
        props: ['form'],
 
+        computed: {
+            // At some point, it'd be ideal to work out how to do this for any number of steps, perhaps using an array of 'visible' values instead of seperates...
+            visible1: {
+                get: function() {return this.currentStep === 1},
+                set: function(newValue) { if(newValue) this.currentStep = 1 },
+            },
+            visible2: {
+                get: function() {return this.currentStep === 2},
+                set: function(newValue) { if(newValue) this.currentStep = 2 },
+            },
+            visible3: {
+                get: function() {return this.currentStep === 3},
+                set: function(newValue) { if(newValue) this.currentStep = 3 },
+            },
+            visible4: {
+                get: function() {return this.currentStep === 4},
+                set: function(newValue) { if(newValue) this.currentStep = 4 },
+            },
+        },
+
         mounted () {
 
             axios.get(rootUrl+'/api/themes').then((response) => {
@@ -384,7 +335,7 @@ const rootUrl = process.env.MIX_APP_URL
 
             axios.get(rootUrl+'/api/modules').then((response) => {
                 this.modules = response.data;
-                if(this.form!=null){ 
+                if(this.form!=null){
                 this.selectedThemes = this.form.themes.map((theme, index)=> {
                     return theme.id;
                 });
@@ -402,41 +353,17 @@ const rootUrl = process.env.MIX_APP_URL
                     $('#collapseFour').collapse('show');
                 }
 
-            // if(this.form!=null){ 
-            //     this.selectedThemes = this.form.themes.map((theme, index)=> {
-            //         return theme.id;
-            //     });
-
-            //     this.selectedModules = this.form.modules.map((module, index)=> {
-            //         return module.id;
-            //     });
-
-            // }
-            
         },
         watch: {
-          
+
             selectedThemes() {
-       
+
                 this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
 
             }
         },
 
         methods: {
-            nextToForm: function (message) {
-                if(message=='themes') {
-                    this.currentStep = 2;
-                    $('#collapseOne').collapse('hide');
-                } else if(message=='core') {
-                    this.currentStep = 3;
-                    $('#collapseTwo').collapse('hide');
-                } else if(message=='modules') {
-                    this.currentStep = 4;
-                    $('#collapseThree').collapse('hide');
-                }
-            },
-         
             submit: function(event){
                 this.busy = true;
                 if(this.form == null){
@@ -459,8 +386,8 @@ const rootUrl = process.env.MIX_APP_URL
                         this.busy = false;
                         console.log(error);
                     });
-                }                   
-            }, 
+                }
+            },
             update: function(event){
                 this.busy = true;
                 if(this.form != null){
@@ -482,8 +409,8 @@ const rootUrl = process.env.MIX_APP_URL
                     }, (error) => {
                         this.busy = false;
                         console.log(error);
-                    });  
-                }                 
+                    });
+                }
 
             }
         }
