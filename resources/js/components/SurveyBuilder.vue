@@ -384,6 +384,17 @@ const rootUrl = process.env.MIX_APP_URL
 
             axios.get(rootUrl+'/api/modules').then((response) => {
                 this.modules = response.data;
+                if(this.form!=null){ 
+                this.selectedThemes = this.form.themes.map((theme, index)=> {
+                    return theme.id;
+                });
+
+                this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
+                this.selectedModules = this.form.modules.map((module, index)=> {
+                    return module.id;
+                });
+
+            }
             })
 
             if(this.currentStep == 4){
@@ -391,18 +402,16 @@ const rootUrl = process.env.MIX_APP_URL
                     $('#collapseFour').collapse('show');
                 }
 
-            if(this.form!=null){ 
-                this.selectedThemes = this.form.themes.map((theme, index)=> {
-                    return theme.id;
-                });
+            // if(this.form!=null){ 
+            //     this.selectedThemes = this.form.themes.map((theme, index)=> {
+            //         return theme.id;
+            //     });
 
-                this.selectedModules = this.form.modules.map((module, index)=> {
-                    return module.id;
-                });
+            //     this.selectedModules = this.form.modules.map((module, index)=> {
+            //         return module.id;
+            //     });
 
-                this.modulesFilter = this.modules.filter(module => this.selectedThemes.includes(module.theme_id));
-
-            }
+            // }
             
         },
         watch: {
