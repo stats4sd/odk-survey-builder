@@ -71,7 +71,7 @@
                                 <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
                                     <input
                                         :id="`full_core_check`"
-                                        v-model="selectedCore"
+                                        v-model="fullCore"
                                         type="checkbox"
                                         :value="true"
                                         class="d-none"
@@ -79,7 +79,7 @@
                                     <label
                                         class="checkdiv"
                                         :for="`full_core_check`"
-                                        :class="{ 'selected' : selectedCore == true}"
+                                        :class="{ 'selected' : fullCore == true}"
                                     >
                                         <img
                                             :src="'/img/full_core.webp'"
@@ -91,7 +91,7 @@
                                     <div class="col-xl-2 col-lg-3 col-md-4 big-img-button">
                                     <input
                                         :id="`reduced_core_check`"
-                                        v-model="selectedCore"
+                                        v-model="fullCore"
                                         type="checkbox"
                                         :value="false"
                                         class="d-none"
@@ -99,7 +99,7 @@
                                     <label
                                         class="checkdiv"
                                         :for="`reduced_core_check`"
-                                        :class="{ 'selected' : selectedCore == false}"
+                                        :class="{ 'selected' : fullCore == false}"
                                     >
                                         <img
                                             :src="'/img/reduced_core.png'"
@@ -198,14 +198,14 @@
                             <h4>Core</h4>
                             <div class="row py-4 mx-4 justify-content-center">
 
-                                <div v-if="selectedCore==true"
+                                <div v-if="fullCore==true"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
                                         :src="'/img/full_core.webp'"
                                     >
                                 </div>
-                                <div v-if="selectedCore==false"
+                                <div v-if="fullCore==false"
                                     class="col-xl-2 col-lg-3 col-md-4 big-img-button"
                                 >
                                     <img
@@ -215,6 +215,11 @@
                             </div>
 
                             <h4>Modules</h4>
+                            <span v-if="this.validationErrors.hasOwnProperty('selectedModules')" class="invalid-feedback" style="display:block" role="alert">
+                                        <span v-for="(error, index) in this.validationErrors['selectedModules']" :key="index">
+                                        {{ error }} <br/>
+                                        </span>
+                                    </span>
                             <div class="row py-4 mx-4 justify-content-center">
                                 <div
                                     v-for="mod in modules"
@@ -237,16 +242,31 @@
                                 <div class="col-md-4">
                                     <h5>Form Title</h5>
                                     <input v-model="formTitle" placeholder="Insert the title">
+                                    <span v-if="this.validationErrors.hasOwnProperty('formTitle')" class="invalid-feedback" style="display:block" role="alert">
+                                        <span v-for="(error, index) in this.validationErrors['formTitle']" :key="index">
+                                        {{ error }} <br/>
+                                        </span>
+                                    </span>
                                 </div>
 
                                 <div class="col-md-4">
                                     <h5>Form Id</h5>
                                     <input v-model="formId" placeholder="Insert the id">
+                                    <span v-if="this.validationErrors.hasOwnProperty('formId')" class="invalid-feedback" style="display:block" role="alert">
+                                        <span v-for="(error, index) in this.validationErrors['formId']" :key="index">
+                                        {{ error }} <br/>
+                                        </span>
+                                    </span>
                                 </div>
 
                                  <div class="col-md-4">
                                     <h5>Default Language</h5>
                                     <input v-model="defaultLanguage" placeholder="Insert the default language">
+                                    <span v-if="this.validationErrors.hasOwnProperty('defaultLanguage')" class="invalid-feedback" style="display:block" role="alert">
+                                        <span v-for="(error, index) in this.validationErrors['defaultLanguage']" :key="index">
+                                        {{ error }} <br/>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
 
@@ -295,13 +315,13 @@ const rootUrl = process.env.MIX_APP_URL
                 modules: [],
                 modulesFilter: [],
                 selectedThemes: [],
-                selectedCore: this.form ? this.form.full_core : true,
+                fullCore: this.form ? this.form.full_core : true,
                 selectedModules:[],
                 formTitle: this.form ? this.form.form_title : '',
                 formId: this.form ? this.form.form_id : [],
                 defaultLanguage: this.form ? this.form.default_language : [],
                 busy: false,
-
+                validationErrors: '',
             }
         },
        props: ['form'],
@@ -324,6 +344,7 @@ const rootUrl = process.env.MIX_APP_URL
                 get: function() {return this.currentStep === 4},
                 set: function(newValue) { if(newValue) this.currentStep = 4 },
             },
+
         },
 
         mounted () {
@@ -372,7 +393,7 @@ const rootUrl = process.env.MIX_APP_URL
                         url: rootUrl+"/survey-builder-selected",
                         data: {
                             selectedThemes: this.selectedThemes,
-                            selectedCore: this.selectedCore,
+                            fullCore: this.fullCore,
                             selectedModules: this.selectedModules,
                             formTitle: this.formTitle,
                             formId: this.formId,
@@ -384,7 +405,10 @@ const rootUrl = process.env.MIX_APP_URL
                        this.busy = false;
                     }, (error) => {
                         this.busy = false;
-                        console.log(error);
+                        if (error.response.status == 422){
+                            this.validationErrors = error.response.data.errors
+                            console.log(this.validationErrors)
+                        }
                     });
                 }
             },
@@ -396,7 +420,7 @@ const rootUrl = process.env.MIX_APP_URL
                         url: rootUrl + "/edit-form/" + this.form.id,
                         data: {
                             selectedThemes: this.selectedThemes,
-                            selectedCore: this.selectedCore,
+                            fullCore: this.fullCore,
                             selectedModules: this.selectedModules,
                             formTitle: this.formTitle,
                             formId: this.formId,

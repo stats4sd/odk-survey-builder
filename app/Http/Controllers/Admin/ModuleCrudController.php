@@ -117,7 +117,7 @@ class ModuleCrudController extends CrudController
                 'label' => 'Logo',
                 'upload' => true,
                 'crop' => true,
-                'ratio' => '1.4',
+                'aspect_ratio' => '1.4',
             ],
         ]);
     }

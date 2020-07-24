@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest as HttpFormRequest;
 
-class FormRequest extends FormRequest
+class FormRequest extends HttpFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,12 @@ class FormRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'formId' => 'required|string',
+            'formTitle' => 'required|string',
+            'fullCore' => 'required|boolean',
+            'defaultLanguage' => 'required|string',
+            'selectedThemes' => 'nullable|array|required_with:selectedModules',
+            'selectedModules' => 'required|array',
         ];
     }
 

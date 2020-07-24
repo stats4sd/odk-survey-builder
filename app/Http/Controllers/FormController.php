@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
 use App\Models\Form;
 use App\Models\Module;
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\FormRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Redirect;
+use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
 class FormController extends Controller
@@ -62,7 +63,7 @@ class FormController extends Controller
         $form->form_title = $request->formTitle;
         $form->form_id = $request->formId;
         $form->default_language = $request->defaultLanguage;
-        $form->full_core = $request->selectedCore;
+        $form->full_core = $request->fullCore;
         $form->file = $file;
         $form->save();
 
@@ -78,8 +79,8 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-     
+    {
+
     }
 
     /**
@@ -110,7 +111,7 @@ class FormController extends Controller
             'form_title'=> $request->formTitle,
             'form_id'=> $request->formId,
             'default_language'=> $request->defaultLanguage,
-            'full_core'=> $request->selectedCore,
+            'full_core'=> $request->fullCore,
             'file' => $file_name
         ]);
 
@@ -130,13 +131,16 @@ class FormController extends Controller
         return  response()->json(['message' => 'The '.$form_title.' form has been successfully deleted.']);
     }
 
-    public function download(Request $request)
+    public function download(FormRequest $request)
     {
-    	$modules = $request->selectedModules;
-        $core = $request->selectedCore;
-        $form_title = "'".$request->formTitle."'";
-        $form_id = "'".$request->formId."'";
-        $default_language = $request->defaultLanguage;
+
+        $validatedData = $request->validated();
+
+    	$modules = $validatedData['selectedModules'];
+        $core = $validatedData['fullCore'];
+        $form_title = "'". $validatedData['formTitle']."'";
+        $form_id = "'". $validatedData['formId']."'";
+        $default_language = $validatedData['defaultLanguage'];
     	$modules_list = "'";
 
     	foreach ($modules as $id) {
@@ -153,7 +157,7 @@ class FormController extends Controller
        	$date = str_replace(':', '', date('c'));
        	$date = str_replace('-', '', $date);
        	$date = str_replace('+', '', $date);
-        $file_name = $date.str_replace(' ', '_', $request->formTitle).".xlsx";
+        $file_name = $date.str_replace(' ', '_', $validatedData['formTitle']).".xlsx";
 
         $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
@@ -177,11 +181,14 @@ class FormController extends Controller
 
     public function generateNewFile(Request $request, $id)
     {
-        $modules = $request->selectedModules;
-        $core = $request->selectedCore;
-        $form_title = "'".$request->formTitle."'";
-        $form_id = "'".$request->formId."'";
-        $default_language = $request->defaultLanguage;
+
+        $validatedData = $request->validated();
+
+        $modules = $validatedData['selectedModules'];
+        $core = $validatedData['fullCore'];
+        $form_title = "'" . $validatedData['formTitle'] . "'";
+        $form_id = "'" . $validatedData['formId'] . "'";
+        $default_language = $validatedData['defaultLanguage'];
         $modules_list = "'";
 
         foreach ($modules as $mod_id) {
@@ -198,7 +205,7 @@ class FormController extends Controller
         $date = str_replace(':', '', date('c'));
         $date = str_replace('-', '', $date);
         $date = str_replace('+', '', $date);
-        $file_name =  $date.str_replace(' ', '_', $request->formTitle).".xlsx";
+        $file_name =  $date.str_replace(' ', '_', $validatedData['formTitle']).".xlsx";
 
         $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
