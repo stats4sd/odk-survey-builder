@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
+use App\Models\Form;
 use App\Models\Module;
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
+use App\Http\Requests\FormRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class FormController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +33,11 @@ class FormController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
 
+        $forms = $user->forms;
+
+        return view('account')->with('forms', $forms);
     }
 
     /**
@@ -25,9 +45,9 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -36,8 +56,19 @@ class FormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, String $file)
     {
+        $form = new Form;
+        $form->user_id = Auth::id();
+        $form->form_title = $request->formTitle;
+        $form->form_id = $request->formId;
+        $form->default_language = $request->defaultLanguage;
+        $form->full_core = $request->fullCore;
+        $form->file = $file;
+        $form->save();
+
+        $form->modules()->sync($request->selectedModules);
+        $form->themes()->sync($request->selectedThemes);
 
     }
 
@@ -47,7 +78,7 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function show(Form $form)
+    public function show($id)
     {
 
     }
@@ -58,9 +89,12 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function edit(Form $form)
+    public function edit($id)
     {
-        //
+        $form = Form::with(['modules', 'themes'])->get();
+        $form = $form->find($id);
+
+        return view('edit')->with('form', $form);
     }
 
     /**
@@ -70,9 +104,17 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Form $form)
+    public function update(Request $request, $file_name, $id)
     {
-        //
+        Form::where('id', $id)->update([
+            'user_id'=> Auth::id(),
+            'form_title'=> $request->formTitle,
+            'form_id'=> $request->formId,
+            'default_language'=> $request->defaultLanguage,
+            'full_core'=> $request->fullCore,
+            'file' => $file_name
+        ]);
+
     }
 
     /**
@@ -81,18 +123,24 @@ class FormController extends Controller
      * @param  \App\Models\Form  $form
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Form $form)
+    public function destroy($id)
     {
-        //
+        $form = Form::find($id);
+        $form_title = $form->form_title;
+        Form::destroy($id);
+        return  response()->json(['message' => 'The '.$form_title.' form has been successfully deleted.']);
     }
 
-    public function download(Request $request)
+    public function download(FormRequest $request)
     {
-    	$modules = $request->selectedModules;
-        $core = $request->selectedCore;
-        $form_title = $request->formTitle;
-        $form_id = $request->formId;
-        $default_language = $request->defaultLanguage;
+
+        $validatedData = $request->validated();
+
+    	$modules = $validatedData['selectedModules'];
+        $core = $validatedData['fullCore'];
+        $form_title = "'". $validatedData['formTitle']."'";
+        $form_id = "'". $validatedData['formId']."'";
+        $default_language = $validatedData['defaultLanguage'];
     	$modules_list = "'";
 
     	foreach ($modules as $id) {
@@ -109,9 +157,9 @@ class FormController extends Controller
        	$date = str_replace(':', '', date('c'));
        	$date = str_replace('-', '', $date);
        	$date = str_replace('+', '', $date);
-        $file_name = $date.$form_title.".xlsx";
+        $file_name = $date.str_replace(' ', '_', $validatedData['formTitle']).".xlsx";
 
-        $process = new Process("pipenv run python {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+        $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
 
         $process->run();
 
@@ -123,6 +171,56 @@ class FormController extends Controller
 
             $process->getOutput();
         }
+
+        $this->store($request, $file_name);
+
+        $path_download = Storage::url('/odk_forms/'.$file_name);
+
+        return response()->json(['path' => $path_download]);
+    }
+
+    public function generateNewFile(Request $request, $id)
+    {
+
+        $validatedData = $request->validated();
+
+        $modules = $validatedData['selectedModules'];
+        $core = $validatedData['fullCore'];
+        $form_title = "'" . $validatedData['formTitle'] . "'";
+        $form_id = "'" . $validatedData['formId'] . "'";
+        $default_language = $validatedData['defaultLanguage'];
+        $modules_list = "'";
+
+        foreach ($modules as $mod_id) {
+            $module = Module::where('id',$mod_id)->first();
+            $file_name = $module->file;
+            $modules_list .= $file_name.',';
+        }
+        $modules_list = substr($modules_list, 0, -1);
+        $modules_list .= "'";
+
+        $scriptName = 'merge_odk_form.py';
+        $scriptPath = base_path() . '/scripts/' . $scriptName;
+        $base_path = base_path();
+        $date = str_replace(':', '', date('c'));
+        $date = str_replace('-', '', $date);
+        $date = str_replace('+', '', $date);
+        $file_name =  $date.str_replace(' ', '_', $validatedData['formTitle']).".xlsx";
+
+        $process = new Process("pipenv run python3 {$scriptPath} {$base_path} {$file_name} {$modules_list} {$core} {$form_title} {$form_id} {$default_language}");
+
+        $process->run();
+
+        if(!$process->isSuccessful()) {
+
+           throw new ProcessFailedException($process);
+
+        } else {
+
+            $process->getOutput();
+        }
+
+        $this->update($request, $file_name, $id);
 
         $path_download = Storage::url('/odk_forms/'.$file_name);
 

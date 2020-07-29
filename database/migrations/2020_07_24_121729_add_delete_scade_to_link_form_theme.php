@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCardColorToModules extends Migration
+class AddDeleteScadeToLinkFormTheme extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddCardColorToModules extends Migration
      */
     public function up()
     {
-        Schema::table('modules', function (Blueprint $table) {
-            $table->string('card_color')->default('white');
+        Schema::table('_link_form_theme', function (Blueprint $table) {
+            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
         });
     }
 
@@ -25,7 +26,7 @@ class AddCardColorToModules extends Migration
      */
     public function down()
     {
-        Schema::table('modules', function (Blueprint $table) {
+        Schema::table('_link_form_theme', function (Blueprint $table) {
             //
         });
     }

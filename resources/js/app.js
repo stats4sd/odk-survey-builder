@@ -7,7 +7,7 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 /**
  * The following block of code may be used to automatically register your

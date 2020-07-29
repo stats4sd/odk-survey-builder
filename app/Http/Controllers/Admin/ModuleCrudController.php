@@ -91,7 +91,7 @@ class ModuleCrudController extends CrudController
             [
                 'name' => 'theme_id',
                 'label' => 'Theme',
-                'type' => 'select',
+                'type' => 'select2',
                 'entity' => 'theme',
                 'attribute' => 'title',
                 'model' => Theme::class
@@ -116,6 +116,8 @@ class ModuleCrudController extends CrudController
                 'type' => 'image',
                 'label' => 'Logo',
                 'upload' => true,
+                'crop' => true,
+                'aspect_ratio' => '1.4',
             ],
         ]);
     }
@@ -124,13 +126,13 @@ class ModuleCrudController extends CrudController
     {
         $this->setupCreateOperation();
 
-        $this->updateField('id', [
-            'name' => 'id',
-            'label' => 'Unique ID',
-            'type' => 'text',
-            'attributes' => [
-                'readonly' => true,
-            ],
-        ]);
+        // $this->updateField('id', [
+        //     'name' => 'id',
+        //     'label' => 'Unique ID',
+        //     'type' => 'text',
+        //     'attributes' => [
+        //         'readonly' => true,
+        //     ]
+        // ]);
     }
 }

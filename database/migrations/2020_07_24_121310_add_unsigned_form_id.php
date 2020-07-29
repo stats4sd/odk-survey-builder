@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LinkModulesLanguages extends Migration
+class AddUnsignedFormId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class LinkModulesLanguages extends Migration
      */
     public function up()
     {
-        Schema::create('_link_modules_languages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('module_id');
-            $table->string('language_id');
-            $table->timestamps();
+        Schema::table('_link_form_theme', function (Blueprint $table) {
+            $table->bigInteger('form_id')->unsigned()->change();
+
         });
     }
 
@@ -28,6 +26,8 @@ class LinkModulesLanguages extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('_link_form_theme', function (Blueprint $table) {
+            //
+        });
     }
 }

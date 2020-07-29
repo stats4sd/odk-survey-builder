@@ -7,6 +7,8 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sdg;
 use App\Models\Language;
+use App\Models\Form;
+use App\Models\Theme;
 
 class Module extends Model
 {
@@ -45,6 +47,17 @@ class Module extends Model
     {
         return $this->belongsToMany(Language::class, '_link_modules_languages');
     }
+
+    public function forms()
+    {
+        return $this->belongsToMany(Forms::class, '_link_form_module');
+    }
+
+    public function theme()
+    {
+        return $this->belongsTo(Theme::class);
+    }
+
 
     /*
     |--------------------------------------------------------------------------

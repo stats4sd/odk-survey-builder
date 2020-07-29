@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use App\Models\Module;
-use App\Models\Form;
+use App\Models\Theme;
 
-class Language extends Model
+class Form extends Model
 {
     use CrudTrait;
 
@@ -17,26 +18,40 @@ class Language extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'languages';
-    public $incrementing = false;
-    protected $guarded = [];
-
+    protected $table = 'forms';
+    // protected $primaryKey = 'id';
+    // public $timestamps = false;
+    protected $guarded = ['id'];
+    // protected $fillable = [];
+    // protected $hidden = [];
+    // protected $dates = [];
+    protected $with = ['themes', 'modules'];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function modules ()
-    {
-        return $this->belongsToMany(Module::class, '_link_modules_sdgs','module_id','sdg_id');
-    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, '_link_form_module');
+    }
+
+    public function themes()
+    {
+        return $this->belongsToMany(Theme::class, '_link_form_theme');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -55,4 +70,13 @@ class Language extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function getFullCoreAttribute($value)
+    {
+        if($value){
+            return  True ;
+        }else {
+            return False;
+        }
+    
+    }
 }

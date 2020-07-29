@@ -12,7 +12,22 @@
 */
 
 Route::get('/', function () {
+    return redirect('home');
+});
+
+Auth::routes();
+
+Route::get('home', 'FormController@index');
+
+
+Route::get('/odk-builder', function () {
     return view('welcome');
 });
 
 Route::post('survey-builder-selected', 'FormController@download');
+
+Route::get('odk-builder/{id}/edit', 'FormController@edit');
+
+Route::post('account/{id}/delete', 'FormController@destroy');
+
+Route::post('edit-form/{id}', 'FormController@generateNewFile');

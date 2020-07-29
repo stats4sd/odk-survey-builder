@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="w-100">
                         <div id='app'>
-                            <survey-builder></survey-builder>
+                            <survey-builder :form="{{$form}}"></survey-builder>
                         </div>
                     </div>
                 </div>
